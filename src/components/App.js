@@ -1,5 +1,12 @@
 import React from 'react';
+import Game from './Game/GamePage';
+import styles from './app.css';
 
 export default function App() {
-  return <h1>Hello World</h1>;
+  return (
+  <body>
+  <h1>DRAW THE THING</h1>
+  <Game />
+  </body>
+  );
 }
