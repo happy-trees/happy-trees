@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function GameInput({ guess, handleSubmit, handleOnChange  }) {
+function GameInput({ guess, handleSubmit, handleChange  }) {
   return (
     <form onSubmit={handleSubmit}>
-      <input type="text" name="guess" value={guess} onChange={handleOnChange} />
+      <input type="text" name="guess" value={guess} onChange={handleChange} />
     </form>
   );
 
@@ -13,7 +13,7 @@ function GameInput({ guess, handleSubmit, handleOnChange  }) {
 GameInput.propTypes = {
   guess: PropTypes.string,
   handleSubmit: PropTypes.func,
-  handleOnChange: PropTypes.func
+  handleChange: PropTypes.func
 };
 
 export default GameInput;
