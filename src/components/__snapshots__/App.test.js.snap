@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component renders App 1`] = `
-<body>
+<section>
   <h1>
     DRAW THE THING
   </h1>
-  <Game />
-</body>
+  <GamePage />
+</section>
 `;
