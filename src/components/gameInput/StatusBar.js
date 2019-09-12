@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from './statusbar.css';
 
-function StatusBar({ guess, handleChange }) {
+
+function StatusBar({ nickName, handleChange }) {
   return (
-    <div className="StatusBar" >
-      <div className="round">1 of 5</div>
-      <div className="timer-container">timer</div>
-      <div className="current-artist">{guess}Danny</div>
-
-      <label htmlFor="brush">Brush </label>
-      <input type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange} />
-
+    <div className={styles.StatusBar}>
+      <div className={styles.round}>1 of 5</div>
+      <div className={styles.timerContainer}>timer</div>
+      <div className={styles.currentArtist}>{nickName}Drawer: Danny</div>
+      <div className={styles.colorPicker}>
+        <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
+        <input className={styles.brushBar} type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange} />
+      </div>
     </div>
   );
 
 }
-
 StatusBar.propTypes = {
-  guess: PropTypes.string,
+  nickName: PropTypes.string,
   handleChange: PropTypes.func
 };
 

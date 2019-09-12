@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+.StatusBar {
+  margin-left: 35vw;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center space-evenly;
+  width: 33vw;
+  height: 6.5vh;
+  font-family: 'Gloria Hallelujah', cursive;
+  /* background-image: url('../../assets/brushbar.png'); */
+  background-size: 110% 110%;
+  /* background-color: #8edddd; */
+}
+.round {
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center space-evenly;
+}
+.timerContainer {
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center space-center;
+}
+.currentArtist {
+  flex-wrap: wrap;
+  margin: auto;
+}
+.colorPicker {
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center space-evenly;
+}
+.brushTitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: auto;
+  padding: 1vw;
+}
+.brushBar {
+  flex-wrap: wrap;
+  margin: auto;
+  width: 5vw;
+  height: 4vh;
+  border-width: 0px;
+}
+
