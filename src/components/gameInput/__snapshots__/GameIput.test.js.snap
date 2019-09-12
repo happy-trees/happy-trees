@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game Input renders Game input component 1`] = `
+<form>
+  <input
+    name="guess"
+    type="text"
+  />
+</form>
+`;
