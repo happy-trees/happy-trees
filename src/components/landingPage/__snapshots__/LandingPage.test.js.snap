@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingPage component renders App 1`] = `
+<Fragment>
+  <h1>
+    Choose Nickname:
+  </h1>
+  <form>
+    <input
+      name="nickname"
+      type="text"
+    />
+    <button>
+      Enter Game
+    </button>
+  </form>
+</Fragment>
+`;

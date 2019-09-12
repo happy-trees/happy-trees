@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ScoresList Input renders ScoresList component 1`] = `
+<Fragment>
+  <h1>
+    Game Results
+  </h1>
+  <div>
+    <h3>
+      Scores
+    </h3>
+  </div>
+  <div>
+    <button>
+      Home
+    </button>
+    <button>
+      Play Again
+    </button>
+  </div>
+</Fragment>
+`;
