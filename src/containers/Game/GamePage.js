@@ -4,7 +4,6 @@ import styles from './game.css';
 
 import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
-// import { startListening } from '../../services/socket';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
 import { beginListening, endListening } from '../../actions/socketActions';
