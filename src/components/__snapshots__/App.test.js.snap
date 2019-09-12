@@ -5,6 +5,6 @@ exports[`App component renders App 1`] = `
   <h1>
     DRAW THE THING
   </h1>
-  <GamePage />
+  <Connect(GamePage) />
 </section>
 `;
