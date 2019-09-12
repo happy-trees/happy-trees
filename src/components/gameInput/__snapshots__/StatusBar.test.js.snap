@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`StatusBar renders Status Bar component 1`] = `
+<div
+  className="StatusBar"
+>
+  <div
+    className="round"
+  >
+    1 of 5
+  </div>
+  <div
+    className="timer-container"
+  >
+    timer
+  </div>
+  <div
+    className="current-artist"
+  >
+    Danny
+  </div>
+  <label
+    htmlFor="brush"
+  >
+    Brush 
+  </label>
+  <input
+    id="brush"
+    name="brush"
+    type="color"
+    value="#FF914D"
+  />
+</div>
+`;
