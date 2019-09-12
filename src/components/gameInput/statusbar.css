@@ -1,0 +1,11 @@
+.StatusBar {
+  margin-left: 30vw;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center space-around;
+  width: 40vw;
+  height: 6vh;
+  text-align: center;
+  border: solid#000000 2px;
+  border-radius: 12px;
+}

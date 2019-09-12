@@ -1,9 +1,10 @@
 body {
-  background-color: #5daecc;
+  background-color: #ffffff;
 }
 h1 {
   margin: auto;
+  font-family: 'Chalkduster';
   text-align: center;
-  color: #fbd8e8;
+  color: #000000;
   font-size: 4em;
 }

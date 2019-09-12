@@ -6,6 +6,8 @@ import io from 'socket.io-client';
 
 import sketch from '../../sketch/sketch';
 
+import StatusBar from '../../components/gameInput/StatusBar';
+
 class GamePage extends React.Component {
 
   state = {
@@ -28,9 +30,12 @@ class GamePage extends React.Component {
   render() {
     const { canvasWidth, canvasHeight } = this.state;
     return (
-      <div id="game-container" className={styles.GameContainer}>
-        <P5Wrapper sketch={sketch} color={'#000000'} canvasWidth={canvasWidth} canvasHeight={canvasHeight} />
-      </div>
+      <>
+        <StatusBar />
+        <div id="game-container" className={styles.GameContainer}>
+          <P5Wrapper sketch={sketch} color={'#000000'} canvasWidth={canvasWidth} canvasHeight={canvasHeight} />
+        </div>
+      </>
     );
   }
 }

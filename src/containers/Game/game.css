@@ -4,4 +4,6 @@
   width: 90vw;
   height: 70vh;
   background-color: #ffffff;
+  border: solid #000000 .5em;
+  border-radius: 12px;
 }
