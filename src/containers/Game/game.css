@@ -1,9 +1,7 @@
 .GameContainer {
   margin: auto;
   margin-top: 5%;
-  border: solid .5em #8edddd;
-  border-radius: 12px;
-  width: 60vw;
+  width: 90vw;
   height: 70vh;
   background-color: #ffffff;
 }

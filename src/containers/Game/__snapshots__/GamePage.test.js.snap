@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Game component renders Game page 1`] = `
-<div
-  className="GameContainer"
-/>
-`;
