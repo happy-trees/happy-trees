@@ -1,10 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game Input renders Game input component 1`] = `
-<form>
-  <input
-    name="guess"
-    type="text"
-  />
-</form>
+<footer>
+  <section>
+    <aside>
+      <p>
+        You have 
+         3 guesses left
+      </p>
+    </aside>
+  </section>
+  <section>
+    <aside
+      className="rounds"
+    >
+      <p>
+        Round 1
+         of 5
+      </p>
+    </aside>
+  </section>
+  <form
+    className="form"
+  >
+    <input
+      className="input"
+      name="guess"
+      type="text"
+    />
+  </form>
+</footer>
 `;
