@@ -1,15 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
 .StatusBar {
   margin-left: 35vw;
-  display: inline-flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center space-evenly;
   width: 33vw;
   height: 6.5vh;
   font-family: 'Gloria Hallelujah', cursive;
-  /* background-image: url('../../assets/brushbar.png'); */
+  text-shadow: 2px 2px 0px  #fff,
+   -2px -2px 0px  #fff,
+   1px -1px 0px  #fff,
+   -2px 1px #fff;
+  font-size: 1em;
+  margin-top: -15px;
+  background-image: url('../../assets/brushbar.png');
   background-size: 110% 110%;
-  /* background-color: #8edddd; */
+  background-color: #8edddd;
 }
 .round {
   flex-wrap: wrap;
@@ -39,7 +45,7 @@
 .brushBar {
   flex-wrap: wrap;
   margin: auto;
-  width: 5vw;
+  width: 4vw;
   height: 4vh;
   border-width: 0px;
 }
