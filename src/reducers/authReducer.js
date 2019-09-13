@@ -8,6 +8,7 @@ const initialState = {
   userId: null,
   nickname: null,
   loading: false,
+  avatar: null,
   error: null,
 };
 
@@ -20,7 +21,8 @@ export default function reducer(state = initialState, action) {
         ...state, 
         loading: false, 
         userId: action.payload._id, 
-        nickname: action.payload.nickname, 
+        nickname: action.payload.nickname,
+        avatar: action.payload.avatar,
         error: null 
       };
     case LOGIN_USER_ERROR:
