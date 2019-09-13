@@ -1,3 +1,4 @@
+
 .GameContainer {
   margin: auto;
   margin-top: 5%;
@@ -6,4 +7,4 @@
   border: solid .3em #000000;
   border-radius: 12px;
   background-color: #ffffff;
-}
+};

@@ -10,7 +10,6 @@ import { beginListening, endListening } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
-import StatusBar from '../../components/gameInput/StatusBar';
 
 class GamePage extends React.Component {
 
@@ -56,9 +55,7 @@ class GamePage extends React.Component {
     const { canvasWidth, canvasHeight } = this.state;
     const { strokes } = this.props;
     return (
-      <>
-        <StatusBar />
-      
+      <>     
       <div id="game-container" className={styles.GameContainer}>
         <P5Wrapper 
           sketch={sketch} 
