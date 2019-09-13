@@ -9,11 +9,11 @@ exports[`App component renders App 1`] = `
           "$$typeof": Symbol(react.memo),
           "WrappedComponent": [Function],
           "compare": null,
-          "displayName": "Connect(LandingPage)",
+          "displayName": "Connect(WithSession)",
           "type": [Function],
         }
       }
-      path="/"
+      path="/game"
     />
     <Route
       component={
@@ -21,11 +21,11 @@ exports[`App component renders App 1`] = `
           "$$typeof": Symbol(react.memo),
           "WrappedComponent": [Function],
           "compare": null,
-          "displayName": "Connect(WithSession)",
+          "displayName": "Connect(LandingContainer)",
           "type": [Function],
         }
       }
-      path="/game"
+      path="/"
     />
   </Switch>
 </BrowserRouter>
