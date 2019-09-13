@@ -24,8 +24,8 @@ import 'normalize.css';
 //   );
 // }
 
-export default function App() {
-  return (
-    <FullGame />
-  );
-}
+  export default function App() {
+    return (
+      <FullGame />
+    );
+  }
