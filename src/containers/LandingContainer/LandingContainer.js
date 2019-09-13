@@ -8,6 +8,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loginUser(
       event.target[0].value
     ));
+    
   }
 });
 
