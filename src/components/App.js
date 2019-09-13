@@ -17,9 +17,9 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/home" component={WithSession(Home)}/>
         <Route path="/game" component={WithSession(Game)}/>
-        <Route path="/" component={Landing}/>
+        <Route path="/landing" component={Landing}/>
+        <Route path="/" component={WithSession(Home)}/>
       </Switch>
     </Router>
   );
