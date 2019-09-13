@@ -3,7 +3,9 @@ export default function sketch(p){
   let props = {};
 
   p.setup = () => {
-    canvas = p.createCanvas(300, 300);
+    const gameContainerElement = document.getElementById('game-container');
+    const measurements = gameContainerElement.getBoundingClientRect();
+    canvas = p.createCanvas(measurements.width - 5, measurements.height - 5);
     p.strokeWeight(2);
   };
 
