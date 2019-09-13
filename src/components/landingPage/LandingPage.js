@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function LandingPage({ handleSubmit, handleChange, nickname }) {
+function LandingPage({ handleSubmit, nickname }) {
+
+
+
 
   return (
       <>
         <h1>Choose Nickname:</h1>
-        <form>
-          <input type="text" name="nickname" value={nickname} onChange={handleChange} />
-          <button onSubmit={handleSubmit}>Enter Game</button>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="nickname" value={nickname} placeholder='nickname...' />
+          <button>Enter Game</button>
         </form>
       </>
   );
@@ -17,7 +20,8 @@ function LandingPage({ handleSubmit, handleChange, nickname }) {
 LandingPage.propTypes = {
   handleSubmit: PropTypes.func,
   nickname: PropTypes.string,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
+  avatar: PropTypes.string
 };
 
 export default LandingPage;
