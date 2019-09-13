@@ -13,6 +13,18 @@ exports[`App component renders App 1`] = `
           "type": [Function],
         }
       }
+      path="/home"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(WithSession)",
+          "type": [Function],
+        }
+      }
       path="/game"
     />
     <Route

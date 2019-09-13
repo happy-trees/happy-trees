@@ -16,7 +16,7 @@ exports[`LandingPage component renders App 1`] = `
       value=""
     />
     <button>
-      Enter Game
+      Enter
     </button>
   </form>
 </Fragment>
