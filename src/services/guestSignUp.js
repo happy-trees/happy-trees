@@ -4,6 +4,7 @@ const bob = 'https://www.google.com/url?sa=i&source=images&cd=&ved=2ahUKEwjF9NiP
 export const guestSignUp = (nickname, avatar = bob) => {
   return fetch('http://localhost:3000/api/v1/auth/guest', {
     method: 'POST',
+    credentials: 'include',
     headers: {
       'Content-Type': 'application/json'
     },
