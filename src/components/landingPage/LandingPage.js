@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getSignUp } from '../../services/guestSignUp';
 
-function LandingPage({ handleSubmit, handleChange, nickname }) {
+function LandingPage({ handleSubmit, handleChange, nickname, avatar }) {
+
+
 
   return (
       <>
@@ -17,7 +20,8 @@ function LandingPage({ handleSubmit, handleChange, nickname }) {
 LandingPage.propTypes = {
   handleSubmit: PropTypes.func,
   nickname: PropTypes.string,
-  handleChange: PropTypes.func
+  handleChange: PropTypes.func,
+  avatar: PropTypes.string
 };
 
 export default LandingPage;
