@@ -11,7 +11,7 @@ function StatusBar({ nickName, handleChange }) {
       <div className={styles.currentArtist}>{nickName}Drawer: Danny</div>
       <div className={styles.colorPicker}>
         <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
-        <input className={styles.brushBar} type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange} />
+        <input className={styles.brushBar} type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange}/>
       </div>
     </div>
   );
