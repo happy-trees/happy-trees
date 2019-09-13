@@ -21,20 +21,6 @@ exports[`StatusBar renders Status Bar component 1`] = `
   </div>
   <div
     className="colorPicker"
-  >
-    <label
-      className="brushTitle"
-      htmlFor="brush"
-    >
-      Brush Color
-    </label>
-    <input
-      className="brushBar"
-      id="brush"
-      name="brush"
-      type="color"
-      value="#FF914D"
-    />
-  </div>
+  />
 </div>
 `;

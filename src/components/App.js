@@ -1,16 +1,24 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+
 import Game from '../containers/Game/GamePage';
+import Landing from '../containers/LandingContainer/LandingContainer';
+import { WithSession } from './WithSession';
 
-import styles from './app.css';
-
+import './app.css';
 import 'normalize.css';
 
 export default function App() {
   return (
-    <section>
-      <h1>DRAW THE THING</h1>
-      
-      <Game />
-    </section>
+    <Router>
+      <Switch>
+        <Route path="/game" component={WithSession(Game)}/>
+        <Route path="/" component={Landing}/>
+      </Switch>
+    </Router>
   );
 }
