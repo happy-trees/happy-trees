@@ -8,6 +8,7 @@ exports[`LandingPage component renders App 1`] = `
   <form>
     <input
       name="nickname"
+      placeholder="nickname..."
       type="text"
     />
     <button>
