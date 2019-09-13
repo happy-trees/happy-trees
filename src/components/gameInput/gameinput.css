@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+.form {
+  display: flex;
+  margin: 0 15px 0 15px;
+  justify-content: center;
+  padding: 3px;
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  border-radius: 30px;
+  height: 100%;
+}
+
+.input {
+  width: 100%;
+  border: white;
+  border-radius: 12px;
+  padding: 0 .325em;
+  color: red;
+}
+
+.input:focus {
+  outline-width: 0;
+}
+
+section {
+  font-family: 'Gloria Hallelujah', cursive;
+}
+
