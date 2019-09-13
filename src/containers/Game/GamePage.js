@@ -66,7 +66,6 @@ class GamePage extends React.Component {
           canvasWidth={canvasWidth} 
           canvasHeight={canvasHeight}
           emitStroke={this.emitStroke}
-          socket={this.socket}
           strokes={strokes}
         />
       </div>

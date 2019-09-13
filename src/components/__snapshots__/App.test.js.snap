@@ -1,11 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App component renders App 1`] = `
-<section>
-  <h1>
-    DRAW THE THING
-  </h1>
-  <Connect(GamePage) />
-</section>
+<BrowserRouter>
+  <Switch>
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(WithSession)",
+          "type": [Function],
+        }
+      }
+      path="/game"
+    />
+    <Route
+      component={
+        Object {
+          "$$typeof": Symbol(react.memo),
+          "WrappedComponent": [Function],
+          "compare": null,
+          "displayName": "Connect(LandingContainer)",
+          "type": [Function],
+        }
+      }
+      path="/"
+    />
+  </Switch>
+</BrowserRouter>
 `;
-
