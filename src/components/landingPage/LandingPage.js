@@ -14,7 +14,7 @@ function LandingPage({ handleSubmit, nickname, handleUpdate }) {
             placeholder='nickname...' 
             onChange={handleUpdate}
           />
-          <button>Enter Game</button>
+          <button>Enter</button>
         </form>
       </>
   );
