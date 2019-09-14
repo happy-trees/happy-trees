@@ -11,6 +11,7 @@ import { getStrokes } from '../../selectors/drawingSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
+import { getUserId } from '../../selectors/authSelectors';
 
 class GamePage extends React.Component {
 
@@ -20,7 +21,8 @@ class GamePage extends React.Component {
     receiveStroke: PropTypes.func.isRequired,
     joinedGame: PropTypes.func.isRequired,
     gameStarted: PropTypes.func.isRequired,
-    strokes: PropTypes.array.isRequired
+    strokes: PropTypes.array.isRequired,
+    userId: PropTypes.string.isRequired,
   }
 
   state = {
@@ -48,9 +50,10 @@ class GamePage extends React.Component {
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
-    this.socket.on('start game', () => {
-      console.log('game started');
-      this.props.gameStarted();
+    this.socket.on('start game', (startRound) => {
+      const { userId } = this.props;
+      console.log('game started', startRound.drawerId);
+      this.props.gameStarted(startRound, userId);
     });
   }
 
@@ -88,7 +91,8 @@ class GamePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  strokes: getStrokes(state)
+  strokes: getStrokes(state),
+  userId: getUserId(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -96,7 +100,7 @@ const mapDispatchToProps = dispatch => ({
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  gameStarted: () => dispatch(gameStarted())
+  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId))
 });
 
 export default connect(

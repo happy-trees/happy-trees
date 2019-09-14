@@ -21,7 +21,12 @@ export default function reducer(state = initialState, action) {
     case JOINED_GAME:
       return { ...state, gameId: action.payload };
     case GAME_STARTED:
-      return { ...state, isPlaying: true };
+      console.log(action.payload);
+      return { 
+        ...state, 
+        isPlaying: true,
+        isDrawing: action.payload.startRound.drawerId === action.payload.userId
+      };
     default:
       return state;
   }
