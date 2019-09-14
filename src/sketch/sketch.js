@@ -8,20 +8,22 @@ export default function sketch(p){
   };
 
   p.mouseDragged = () => {
-    p.stroke(0, 0, 0);
-    p.strokeWeight(5);
-    p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
-
-    if(props.emitStroke) {
-      const data = {
-        x: p.mouseX,
-        y: p.mouseY,
-        px: p.pmouseX,
-        py: p.pmouseY,
-        color: '#000000',
-        strokeWidth: 5
-      };
-      props.emitStroke(data);
+    if(props.isDrawing) {
+      p.stroke(0, 0, 0);
+      p.strokeWeight(5);
+      p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
+  
+      if(props.emitStroke) {
+        const data = {
+          x: p.mouseX,
+          y: p.mouseY,
+          px: p.pmouseX,
+          py: p.pmouseY,
+          color: '#000000',
+          strokeWidth: 5
+        };
+        props.emitStroke(data);
+      }
     }
   };
 

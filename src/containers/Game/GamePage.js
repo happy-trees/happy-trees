@@ -12,6 +12,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
+import { getIsDrawing } from '../../selectors/socketSelectors';
 
 class GamePage extends React.Component {
 
@@ -23,6 +24,7 @@ class GamePage extends React.Component {
     gameStarted: PropTypes.func.isRequired,
     strokes: PropTypes.array.isRequired,
     userId: PropTypes.string.isRequired,
+    isDrawing: PropTypes.bool.isRequired
   }
 
   state = {
@@ -68,7 +70,8 @@ class GamePage extends React.Component {
   
   render() {
     const { canvasWidth, canvasHeight } = this.state;
-    const { strokes } = this.props;
+    const { strokes, isDrawing } = this.props;
+
     return (
       <>
         <StatusBar />
@@ -81,6 +84,7 @@ class GamePage extends React.Component {
           canvasHeight={canvasHeight}
           emitStroke={this.emitStroke}
           strokes={strokes}
+          isDrawing={isDrawing}
         />
       </div>
       </>
@@ -91,7 +95,8 @@ class GamePage extends React.Component {
 
 const mapStateToProps = (state) => ({
   strokes: getStrokes(state),
-  userId: getUserId(state)
+  userId: getUserId(state),
+  isDrawing: getIsDrawing(state)
 });
 
 const mapDispatchToProps = dispatch => ({
