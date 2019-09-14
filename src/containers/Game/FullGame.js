@@ -12,7 +12,7 @@ const FullGame = () => {
       <h1>Happy Trees</h1>
       <StatusBar />
       <div className={styles.Word}>
-        <h3>Word</h3>
+        <h3>W o r d</h3>
       </div>
       <GamePage />
       <div className={styles.GameInput}>

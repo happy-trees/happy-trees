@@ -54,19 +54,19 @@ class GamePage extends React.Component {
   render() {
     const { canvasWidth, canvasHeight } = this.state;
     const { strokes } = this.props;
-    return (
-      <>     
+    return (   
       <div id="game-container" className={styles.GameContainer}>
-        <P5Wrapper 
-          sketch={sketch} 
-          color={'#000000'} 
-          canvasWidth={canvasWidth} 
-          canvasHeight={canvasHeight}
-          emitStroke={this.emitStroke}
-          strokes={strokes}
-        />
+        <div className={styles.fuck}>   
+          <P5Wrapper 
+            sketch={sketch} 
+            color={'#000000'} 
+            canvasWidth={canvasWidth} 
+            canvasHeight={canvasHeight}
+            emitStroke={this.emitStroke}
+            strokes={strokes}
+          />
+        </div>
       </div>
-      </>
 
     );
   }

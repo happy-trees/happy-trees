@@ -7,20 +7,12 @@ function GameInput({ guesses, guess, handleSubmit, handleChange  }) {
     
     <footer>
       <section>
-        <aside>
-          <p>You have {guesses} 3 guesses left</p>
-        </aside>
+        <p className={styles.guess}>You have {guesses} 3 guesses left</p>
       </section>
-
-      {/* <section>
-        <aside className="rounds">
-          <p>Round 1{} of 5</p>
-        </aside>
-      </section> */}
     
       <form className={styles.form} onSubmit={handleSubmit}>
         <input className={styles.input} type="text" name="guess" value={guess} onChange={handleChange} />
-        <button>+</button>
+        <button className={styles.button}>+</button>
       </form>
     </footer>
     
