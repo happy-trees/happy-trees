@@ -52,7 +52,6 @@ class GamePage extends React.Component {
 
     this.socket.on('start game', (startRound) => {
       const { userId } = this.props;
-      console.log('game started', startRound.drawerId);
       this.props.gameStarted(startRound, userId);
     });
   }
