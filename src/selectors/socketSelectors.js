@@ -1,2 +1,3 @@
 export const getSocketState = state => state.socket;
-export const getIsDrawing = state => state.socket.isDrawing;
+export const getIsDrawing = state => getSocketState(state).isDrawing;
+export const getGameId = state => getSocketState(state).gameId;
