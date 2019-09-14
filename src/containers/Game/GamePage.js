@@ -6,7 +6,7 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
@@ -18,6 +18,8 @@ class GamePage extends React.Component {
     startListening: PropTypes.func.isRequired,
     stopListening: PropTypes.func.isRequired,
     receiveStroke: PropTypes.func.isRequired,
+    joinedGame: PropTypes.func.isRequired,
+    gameStarted: PropTypes.func.isRequired,
     strokes: PropTypes.array.isRequired
   }
 
@@ -36,9 +38,19 @@ class GamePage extends React.Component {
         canvasHeight: gameContainer.offsetHeight 
       });
 
+    this.socket.emit('find game');
+
     this.props.startListening();
+
     this.socket.on('stroke', data => {
       this.props.receiveStroke(data);
+    });
+
+    this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
+
+    this.socket.on('start game', () => {
+      console.log('game started');
+      this.props.gameStarted();
     });
   }
 
@@ -82,7 +94,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
   stopListening: () => dispatch(endListening()),
-  receiveStroke: (data) => dispatch(receiveStroke(data))
+  receiveStroke: (data) => dispatch(receiveStroke(data)),
+  joinedGame: (gameId) => dispatch(joinedGame(gameId)),
+  gameStarted: () => dispatch(gameStarted())
 });
 
 export default connect(
