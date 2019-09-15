@@ -9,7 +9,8 @@ const initialState = {
   listening: false,
   gameId: null,
   isPlaying: false,
-  isDrawing: false
+  isDrawing: false,
+  roundId: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -24,7 +25,8 @@ export default function reducer(state = initialState, action) {
       return { 
         ...state, 
         isPlaying: true,
-        isDrawing: action.payload.startRound.drawerId === action.payload.userId
+        isDrawing: action.payload.startRound.drawerId === action.payload.userId,
+        roundId: action.payload.startRound._id
       };
     default:
       return state;
