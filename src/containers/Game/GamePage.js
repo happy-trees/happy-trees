@@ -51,6 +51,10 @@ class GamePage extends React.Component {
       this.props.receiveStroke(data);
     });
 
+    this.socket.on('timer', countdown => {
+      console.log(countdown);
+    });
+
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
     this.socket.on('start game', (startRound) => {
