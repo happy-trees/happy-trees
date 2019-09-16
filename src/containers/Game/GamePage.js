@@ -89,6 +89,10 @@ class GamePage extends React.Component {
     this.socket.on('new round', ({ round }) => {
       console.log('new round', round);
     });
+
+    this.socket.on('round over', () => {
+      console.log('round over');
+    });
   }
 
   componentWillUnmount() {
