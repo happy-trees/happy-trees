@@ -7,7 +7,7 @@ exports[`Game Input renders Game input component 1`] = `
       className="guess"
     >
       You have 
-       3 guesses left
+       guesses left
     </p>
   </section>
   <form
