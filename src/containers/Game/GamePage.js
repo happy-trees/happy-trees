@@ -6,7 +6,7 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted, startNewRound } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
@@ -30,7 +30,8 @@ class GamePage extends React.Component {
     gameId: PropTypes.string,
     roundId: PropTypes.string,
     nickname: PropTypes.string,
-    isPlaying: PropTypes.bool.isRequired
+    isPlaying: PropTypes.bool.isRequired,
+    startNewRound: PropTypes.func.isRequired
   }
 
   state = {
@@ -88,6 +89,7 @@ class GamePage extends React.Component {
 
     this.socket.on('new round', ({ round }) => {
       console.log('new round', round);
+      this.props.startNewRound(round, this.props.userId);
     });
 
     this.socket.on('round over', () => {
@@ -174,7 +176,8 @@ const mapDispatchToProps = dispatch => ({
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId))
+  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId)),
+  startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
 });
 
 export default connect(

@@ -3,6 +3,7 @@ import {
   END_LISTENING,
   JOINED_GAME,
   GAME_STARTED,
+  START_NEW_ROUND,
 } from '../actions/socketActions';
 
 const initialState = {
@@ -27,6 +28,12 @@ export default function reducer(state = initialState, action) {
         isPlaying: true,
         isDrawing: action.payload.startRound.drawerId === action.payload.userId,
         roundId: action.payload.startRound._id
+      };
+    case START_NEW_ROUND:
+      return {
+        ...state,
+        isDrawing: action.payload.round.drawerId === action.payload.userId,
+        roundId: action.payload.round._id
       };
     default:
       return state;
