@@ -1,9 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function PlayButton({ playGame }) {
   return (
-    <button onSubmit={playGame}> Let&apos;s Draw </button>
+    <Link to={'/game'} >
+      <button onSubmit={playGame}> Let&apos;s Draw </button>
+    </Link>
   );
 }
 

@@ -17,7 +17,7 @@ exports[`StatusBar renders Status Bar component 1`] = `
   <div
     className="currentArtist"
   >
-    Drawer: Danny
+    Drawer: 
   </div>
   <div
     className="colorPicker"
