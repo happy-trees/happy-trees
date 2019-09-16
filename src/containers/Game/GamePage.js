@@ -93,6 +93,10 @@ class GamePage extends React.Component {
     this.socket.on('round over', () => {
       console.log('round over');
     });
+
+    this.socket.on('game over', () => {
+      console.log('game over');
+    });
   }
 
   componentWillUnmount() {
