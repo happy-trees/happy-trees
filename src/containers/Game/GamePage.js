@@ -72,6 +72,10 @@ class GamePage extends React.Component {
     this.socket.on('correct answer', () => {
       console.log('someone made a correct answer');
     });
+
+    this.socket.on('intermission', ({ countdown }) => {
+      console.log('intermission', countdown);
+    });
   }
 
   componentWillUnmount() {
