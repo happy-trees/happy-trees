@@ -21,7 +21,7 @@ function GameInput({ guesses, guess, handleSubmit, handleChange  }) {
 }
 
 GameInput.propTypes = {
-  guesses: PropTypes.string,
+  guesses: PropTypes.number,
   guess: PropTypes.string,
   handleSubmit: PropTypes.func,
   handleChange: PropTypes.func
