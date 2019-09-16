@@ -74,6 +74,7 @@ class GamePage extends React.Component {
 
   emitStroke = (data) => {
     const { gameId } = this.props;
+    this.props.receiveStroke(data);
     this.socket.emit('stroke', { data, gameId });
   }
   
