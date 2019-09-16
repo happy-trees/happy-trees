@@ -1,23 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LandingPage component renders App 1`] = `
-<Fragment>
+<div
+  className="LandingPage"
+>
   <h1>
     Choose Nickname:
   </h1>
-  <form
-    onSubmit={[Function]}
+  <div
+    classNAme="Form"
   >
-    <input
-      name="nickname"
-      onChange={[Function]}
-      placeholder="nickname..."
-      type="text"
-      value=""
-    />
-    <button>
-      Enter
-    </button>
-  </form>
-</Fragment>
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="nickname"
+        onChange={[Function]}
+        placeholder="nickname..."
+        type="text"
+        value=""
+      />
+      <button>
+        Enter
+      </button>
+    </form>
+  </div>
+</div>
 `;
