@@ -11,9 +11,13 @@ exports[`ScoresList Input renders ScoresList component 1`] = `
     </h3>
   </div>
   <div>
-    <button>
-      Home
-    </button>
+    <Link
+      to="/"
+    >
+      <button>
+        Home
+      </button>
+    </Link>
     <button>
       Play Again
     </button>
