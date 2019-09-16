@@ -13,7 +13,8 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying } from '../../selectors/socketSelectors';
+import GameInput from '../../components/gameInput/GameInput';
 
 class GamePage extends React.Component {
 
@@ -27,13 +28,16 @@ class GamePage extends React.Component {
     userId: PropTypes.string.isRequired,
     isDrawing: PropTypes.bool.isRequired,
     gameId: PropTypes.string,
-    nickname: PropTypes.string
+    roundId: PropTypes.string,
+    nickname: PropTypes.string,
+    isPlaying: PropTypes.bool.isRequired
   }
 
   state = {
     cavasWidth: null,
     canvasHeight: null,
     time: null,
+    guess: '',
   }
 
   socket = io('http://localhost:3000');
@@ -64,6 +68,10 @@ class GamePage extends React.Component {
       const { userId } = this.props;
       this.props.gameStarted(startRound, userId);
     });
+
+    this.socket.on('correct answer', () => {
+      console.log('someone made a correct answer');
+    });
   }
 
   componentWillUnmount() {
@@ -72,15 +80,32 @@ class GamePage extends React.Component {
     this.props.stopListening();
   }
 
+  handleChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  }
+
   emitStroke = (data) => {
     const { gameId } = this.props;
     this.props.receiveStroke(data);
     this.socket.emit('stroke', { data, gameId });
   }
+
+  emitAnswer = (e) => {
+    e.preventDefault();
+    const { gameId, roundId } = this.props;
+    const { guess } = this.state;
+    this.socket.emit('answer', {
+      answer: guess,
+      roundId,
+      gameId,
+      currentRoundNumber: 1
+    });
+    this.setState({ guess: '' });
+  }
   
   render() {
-    const { canvasWidth, canvasHeight, time } = this.state;
-    const { isDrawing, nickname, strokes } = this.props;
+    const { canvasWidth, canvasHeight, time, guess } = this.state;
+    const { isDrawing, nickname, strokes, isPlaying } = this.props;
     
     return (
       <>
@@ -97,6 +122,13 @@ class GamePage extends React.Component {
             isDrawing={isDrawing}
           />
         </div>
+        {isPlaying && !isDrawing && <GameInput 
+          guesses={3}
+          guess={guess}
+          handleSubmit={this.emitAnswer}
+          handleChange={this.handleChange}
+        />}
+        
       </>
     );
   }
@@ -107,7 +139,9 @@ const mapStateToProps = (state) => ({
   userId: getUserId(state),
   isDrawing: getIsDrawing(state),
   gameId: getGameId(state),
-  nickname: getUserNickname(state)
+  roundId: getRoundId(state),
+  nickname: getUserNickname(state),
+  isPlaying: getIsPlaying(state)
 });
 
 const mapDispatchToProps = dispatch => ({
