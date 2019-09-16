@@ -44,14 +44,18 @@ class GamePage extends React.Component {
 
   componentDidMount() {
     const gameContainer = document.querySelector('#game-container');
-    if(gameContainer && gameContainer.offsetWidth && gameContainer.offsetWidth)
+    if(gameContainer && gameContainer.offsetWidth && gameContainer.offsetWidth) {
       this.setState({ 
         canvasWidth:  gameContainer.offsetWidth, 
         canvasHeight: gameContainer.offsetHeight 
       });
-
+    }
+    
+    this.listenForGameEvents();
     this.socket.emit('find game');
+  }
 
+  listenForGameEvents = () => {
     this.props.startListening();
 
     this.socket.on('stroke', data => {
