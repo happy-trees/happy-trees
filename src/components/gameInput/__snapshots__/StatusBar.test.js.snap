@@ -1,26 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StatusBar renders Status Bar component 1`] = `
-<div
-  className="StatusBar"
->
+<Fragment>
   <div
-    className="round"
+    className="StatusBar"
   >
-    1 of 5
+    <div
+      className="round"
+    >
+      1 of 5
+    </div>
+    <div
+      className="timerContainer"
+    >
+      timer: 
+    </div>
+    <div
+      className="currentArtist"
+    >
+      Drawer: 
+    </div>
+    <div
+      className="colorPicker"
+    />
   </div>
-  <div
-    className="timerContainer"
-  >
-    timer: 
-  </div>
-  <div
-    className="currentArtist"
-  >
-    Drawer: 
-  </div>
-  <div
-    className="colorPicker"
-  />
-</div>
+</Fragment>
 `;
