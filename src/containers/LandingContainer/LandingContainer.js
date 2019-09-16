@@ -21,7 +21,7 @@ class LandingContainer extends React.Component {
     const { error, userId } = this.props;
     if(prevProps !== this.props) {
       if(!error && userId) {
-        this.props.history.push('/game');
+        this.props.history.push('/');
       }
     }
   }

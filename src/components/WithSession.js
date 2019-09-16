@@ -12,7 +12,7 @@ export const WithSession = Component => {
 
     componentDidMount() {
       if(!this.props.userId) {
-        this.props.history.replace('/');
+        this.props.history.replace('/landing');
       }
     }
 

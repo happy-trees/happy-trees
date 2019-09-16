@@ -6,10 +6,14 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
+import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
+import StatusBar from '../../components/gameInput/StatusBar';
+import { getUserId } from '../../selectors/authSelectors';
+import { getIsDrawing, getGameId } from '../../selectors/socketSelectors';
 
 class GamePage extends React.Component {
 
@@ -17,7 +21,13 @@ class GamePage extends React.Component {
     startListening: PropTypes.func.isRequired,
     stopListening: PropTypes.func.isRequired,
     receiveStroke: PropTypes.func.isRequired,
-    strokes: PropTypes.array.isRequired
+    joinedGame: PropTypes.func.isRequired,
+    gameStarted: PropTypes.func.isRequired,
+    strokes: PropTypes.array.isRequired,
+    userId: PropTypes.string.isRequired,
+    isDrawing: PropTypes.bool.isRequired,
+    gameId: PropTypes.string,
+    nickname: PropTypes.string
   }
 
   state = {
@@ -35,9 +45,23 @@ class GamePage extends React.Component {
         canvasHeight: gameContainer.offsetHeight 
       });
 
+    this.socket.emit('find game');
+
     this.props.startListening();
+
     this.socket.on('stroke', data => {
       this.props.receiveStroke(data);
+    });
+
+    this.socket.on('timer', countdown => {
+      console.log(countdown);
+    });
+
+    this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
+
+    this.socket.on('start game', (startRound) => {
+      const { userId } = this.props;
+      this.props.gameStarted(startRound, userId);
     });
   }
 
@@ -48,38 +72,48 @@ class GamePage extends React.Component {
   }
 
   emitStroke = (data) => {
-    this.socket.emit('stroke', data);
+    const { gameId } = this.props;
+    this.socket.emit('stroke', { data, gameId });
   }
   
   render() {
     const { canvasWidth, canvasHeight } = this.state;
-    const { strokes } = this.props;
-    return (   
+    const { strokes, isDrawing, nickname } = this.props;
+    
+    return (
+      <>
+        <StatusBar nickname={nickname}  />
+      
       <div id="game-container" className={styles.GameContainer}>
-        <div className={styles.fuck}>   
-          <P5Wrapper 
-            sketch={sketch} 
-            color={'#000000'} 
-            canvasWidth={canvasWidth} 
-            canvasHeight={canvasHeight}
-            emitStroke={this.emitStroke}
-            strokes={strokes}
-          />
-        </div>
+        <P5Wrapper 
+          sketch={sketch} 
+          color={'#000000'} 
+          canvasWidth={canvasWidth} 
+          canvasHeight={canvasHeight}
+          emitStroke={this.emitStroke}
+          strokes={strokes}
+          isDrawing={isDrawing}
+        />
       </div>
-
+      </>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  strokes: getStrokes(state)
+  strokes: getStrokes(state),
+  userId: getUserId(state),
+  isDrawing: getIsDrawing(state),
+  gameId: getGameId(state),
+  nickname: getUserNickname(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
   stopListening: () => dispatch(endListening()),
-  receiveStroke: (data) => dispatch(receiveStroke(data))
+  receiveStroke: (data) => dispatch(receiveStroke(data)),
+  joinedGame: (gameId) => dispatch(joinedGame(gameId)),
+  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId))
 });
 
 export default connect(
