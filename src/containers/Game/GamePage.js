@@ -96,7 +96,6 @@ class GamePage extends React.Component {
         />
       </div>
       </>
-
     );
   }
 }

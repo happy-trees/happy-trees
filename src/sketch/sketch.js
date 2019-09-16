@@ -3,6 +3,8 @@ export default function sketch(p){
   let props = {};
 
   p.setup = () => {
+    // const gameContainerElement = document.getElementById('game-container');
+    // const measurements = gameContainerElement.getBoundingClientRect();
     canvas = p.createCanvas(300, 300);
     p.strokeWeight(2);
   };
