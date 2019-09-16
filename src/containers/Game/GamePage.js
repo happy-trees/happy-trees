@@ -45,21 +45,26 @@ class GamePage extends React.Component {
 
   componentDidMount() {
     const gameContainer = document.querySelector('#game-container');
-    if(gameContainer && gameContainer.offsetWidth && gameContainer.offsetWidth)
+    if(gameContainer && gameContainer.offsetWidth && gameContainer.offsetWidth) {
       this.setState({ 
         canvasWidth:  gameContainer.offsetWidth, 
         canvasHeight: gameContainer.offsetHeight 
       });
+    }
 
+    this.listenForGameEvents();
     this.socket.emit('find game');
+  }
 
+  listenForGameEvents = () => {
     this.props.startListening();
 
     this.socket.on('stroke', data => {
       this.props.receiveStroke(data);
     });
 
-    this.socket.on('timer', countdown => {
+    this.socket.on('timer', ({ countdown, round }) => {
+      console.log('round timer', countdown, round);
       this.setState({ time: countdown });
     });
 
@@ -72,6 +77,22 @@ class GamePage extends React.Component {
 
     this.socket.on('correct answer', () => {
       console.log('someone made a correct answer');
+    });
+
+    this.socket.on('wrong answer', () => [
+      console.log('someone made a wrong answer')
+    ]);
+
+    this.socket.on('intermission', ({ countdown }) => {
+      console.log('intermission', countdown);
+    });
+
+    this.socket.on('new round', ({ round }) => {
+      console.log('new round', round);
+    });
+
+    this.socket.on('round over', () => {
+      console.log('round over');
     });
   }
 
