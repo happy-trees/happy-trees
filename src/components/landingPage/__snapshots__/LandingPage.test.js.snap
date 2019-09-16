@@ -8,7 +8,7 @@ exports[`LandingPage component renders App 1`] = `
     Choose Nickname:
   </h1>
   <div
-    classNAme="Form"
+    className="Form"
   >
     <form
       onSubmit={[Function]}
