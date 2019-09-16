@@ -9,28 +9,21 @@ import Home from '../containers/Home/Home.js';
 import Game from '../containers/Game/GamePage';
 import Landing from '../containers/LandingContainer/LandingContainer';
 import { WithSession } from './WithSession';
-import FullGame from '../containers/Game/FullGame';
+// import FullGame from '../containers/Game/FullGame';
 
 import './app.css';
 import 'normalize.css';
 
-// export default function App() {
-//   return (
-//     <Router>
-//       <Switch>
-//         <Route path="/game" component={WithSession(Game)}/>
-//         <Route path="/landing" component={Landing}/>
-//         <Route path="/" component={WithSession(Home)}/>
-//       </Switch>
-//     </Router>
-//   );
-// }
-
-const App = () => {
-
+export default function App() {
   return (
-    <FullGame/>
+    <Router>
+      <Switch>
+        <Route path="/game" component={WithSession(Game)}/>
+        <Route path="/landing" component={Landing}/>
+        <Route path="/" component={WithSession(Home)}/>
+      </Switch>
+    </Router>
   );
-};
+}
 
-export default App;
+
