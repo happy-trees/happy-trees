@@ -3,22 +3,12 @@
 exports[`Game Input renders Game input component 1`] = `
 <footer>
   <section>
-    <aside>
-      <p>
-        You have 
-         3 guesses left
-      </p>
-    </aside>
-  </section>
-  <section>
-    <aside
-      className="rounds"
+    <p
+      className="guess"
     >
-      <p>
-        Round 1
-         of 5
-      </p>
-    </aside>
+      You have 
+       3 guesses left
+    </p>
   </section>
   <form
     className="form"
@@ -28,6 +18,11 @@ exports[`Game Input renders Game input component 1`] = `
       name="guess"
       type="text"
     />
+    <button
+      className="button"
+    >
+      +
+    </button>
   </form>
 </footer>
 `;
