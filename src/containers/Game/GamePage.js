@@ -32,7 +32,8 @@ class GamePage extends React.Component {
 
   state = {
     cavasWidth: null,
-    canvasHeight: null
+    canvasHeight: null,
+    time: null,
   }
 
   socket = io('http://localhost:3000');
@@ -54,7 +55,7 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('timer', countdown => {
-      console.log(countdown);
+      this.setState({ time: countdown });
     });
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
@@ -77,24 +78,24 @@ class GamePage extends React.Component {
   }
   
   render() {
-    const { canvasWidth, canvasHeight } = this.state;
-    const { strokes, isDrawing, nickname } = this.props;
+    const { canvasWidth, canvasHeight, time } = this.state;
+    const { isDrawing, nickname, strokes } = this.props;
     
     return (
       <>
-        <StatusBar nickname={nickname}  />
+        <StatusBar nickname={nickname} time={time} />
       
-      <div id="game-container" className={styles.GameContainer}>
-        <P5Wrapper 
-          sketch={sketch} 
-          color={'#000000'} 
-          canvasWidth={canvasWidth} 
-          canvasHeight={canvasHeight}
-          emitStroke={this.emitStroke}
-          strokes={strokes}
-          isDrawing={isDrawing}
-        />
-      </div>
+        <div id="game-container" className={styles.GameContainer}>
+          <P5Wrapper 
+            sketch={sketch} 
+            color={'#000000'} 
+            canvasWidth={canvasWidth} 
+            canvasHeight={canvasHeight}
+            emitStroke={this.emitStroke}
+            strokes={strokes}
+            isDrawing={isDrawing}
+          />
+        </div>
       </>
 
     );
