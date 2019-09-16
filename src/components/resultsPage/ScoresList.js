@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Score from './Score';
 import PropTypes from 'prop-types';
 import getScores from '../../services/getScoresApi';
+import { Link } from 'react-router-dom';
+
 
 const ScoresList = () => {
 
@@ -25,7 +27,9 @@ const ScoresList = () => {
       </div>
       <div>
         {/* fix buttons to link to home page and landingPage */}
-        <button>Home</button>
+        <Link to="/">
+          <button>Home</button>
+        </Link>
         <button>Play Again</button>
       </div>
       </>
