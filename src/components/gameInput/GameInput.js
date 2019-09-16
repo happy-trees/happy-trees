@@ -7,7 +7,7 @@ function GameInput({ guesses, guess, handleSubmit, handleChange  }) {
     
     <footer>
       <section>
-        <p className={styles.guess}>You have {guesses} 3 guesses left</p>
+        <p className={styles.guess}>You have {guesses} guesses left</p>
       </section>
     
       <form className={styles.form} onSubmit={handleSubmit}>

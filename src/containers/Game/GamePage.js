@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './game.css';
+
+import styles from './FullGame.css';
 
 import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
@@ -136,8 +137,12 @@ class GamePage extends React.Component {
     
     return (
       <>
+      <div className={styles.FullGame}>
+        <h1>Happy Trees</h1>
         <StatusBar nickname={nickname} time={time} />
-      
+        <div className={styles.Word}>
+          <h3>W o r d</h3>
+        </div>
         <div id="game-container" className={styles.GameContainer}>
           <P5Wrapper 
             sketch={sketch} 
@@ -155,7 +160,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        
+      </div>
       </>
     );
   }
