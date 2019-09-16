@@ -50,7 +50,7 @@ class GamePage extends React.Component {
         canvasHeight: gameContainer.offsetHeight 
       });
     }
-    
+
     this.listenForGameEvents();
     this.socket.emit('find game');
   }
@@ -62,7 +62,8 @@ class GamePage extends React.Component {
       this.props.receiveStroke(data);
     });
 
-    this.socket.on('timer', countdown => {
+    this.socket.on('timer', ({ countdown, round }) => {
+      console.log('round timer', countdown, round);
       this.setState({ time: countdown });
     });
 
