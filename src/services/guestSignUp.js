@@ -1,22 +1,7 @@
-import bobavblue from '../assets/avatars/bobavblue.png';
+// import bobavblue from '../assets/avatars/bobavblue.png';
 import bobavgreen from '../assets/avatars/bobavgreen.png';
-import bobavpink from '../assets/avatars/bobavpink.png';
-import bobavpurple from '../assets/avatars/bobavpurple.png';
-
-const bobAvatars = { 
-  bobAv1: {
-    image: bobavblue 
-  },
-  bobAv2: {
-    image: bobavgreen
-  },
-  bobAv3: {
-    image: bobavpink
-  },
-  bobAv4: {
-    image: bobavpurple
-  }
-};
+// import bobavpink from '../assets/avatars/bobavpink.png';
+// import bobavpurple from '../assets/avatars/bobavpurple.png';
 
 
 export const guestSignUp = (nickname, avatar = bobavgreen) => {
