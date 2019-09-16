@@ -3,6 +3,7 @@ import {
   END_LISTENING,
   JOINED_GAME,
   GAME_STARTED,
+  GUEST_ANSWERED,
 } from '../actions/socketActions';
 
 const initialState = {
@@ -10,7 +11,8 @@ const initialState = {
   gameId: null,
   isPlaying: false,
   isDrawing: false,
-  roundId: null
+  roundId: null,
+  guesses: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -28,6 +30,8 @@ export default function reducer(state = initialState, action) {
         isDrawing: action.payload.startRound.drawerId === action.payload.userId,
         roundId: action.payload.startRound._id
       };
+    case GUEST_ANSWERED:
+      return { ...state, guesses: action.payload };
     default:
       return state;
   }
