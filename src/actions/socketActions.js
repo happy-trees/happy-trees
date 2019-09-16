@@ -19,3 +19,5 @@ export const gameStarted = (startRound, userId) => ({
   type: GAME_STARTED,
   payload: { startRound, userId }
 });
+
+export const GUEST_ANSWERED = 'GUEST_ANSWERED';

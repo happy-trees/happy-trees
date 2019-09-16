@@ -15,6 +15,7 @@ import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
 import { getIsDrawing, getGameId, getRoundId, getIsPlaying } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
+import ModalStats from '../../components/modal/ModalStats';
 
 class GamePage extends React.Component {
 
@@ -128,6 +129,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
+        { time === 0 && <ModalStats nickname={nickname} guess={guess} /> }
         
       </>
     );
