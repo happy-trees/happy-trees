@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
 import { beginListening, endListening, joinedGame, gameStarted } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
+import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
@@ -25,7 +26,8 @@ class GamePage extends React.Component {
     strokes: PropTypes.array.isRequired,
     userId: PropTypes.string.isRequired,
     isDrawing: PropTypes.bool.isRequired,
-    gameId: PropTypes.string
+    gameId: PropTypes.string,
+    nickname: PropTypes.string
   }
 
   state = {
@@ -76,11 +78,11 @@ class GamePage extends React.Component {
   
   render() {
     const { canvasWidth, canvasHeight } = this.state;
-    const { strokes, isDrawing } = this.props;
-
+    const { strokes, isDrawing, nickname } = this.props;
+    
     return (
       <>
-        <StatusBar />
+        <StatusBar nickname={nickname}  />
       
       <div id="game-container" className={styles.GameContainer}>
         <P5Wrapper 
@@ -103,7 +105,8 @@ const mapStateToProps = (state) => ({
   strokes: getStrokes(state),
   userId: getUserId(state),
   isDrawing: getIsDrawing(state),
-  gameId: getGameId(state)
+  gameId: getGameId(state),
+  nickname: getUserNickname(state)
 });
 
 const mapDispatchToProps = dispatch => ({
