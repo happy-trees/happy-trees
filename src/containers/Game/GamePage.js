@@ -71,9 +71,10 @@ class GamePage extends React.Component {
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
-    this.socket.on('start game', (startRound) => {
+    this.socket.on('start game', ({ round }) => {
       const { userId } = this.props;
-      this.props.gameStarted(startRound, userId);
+      console.log('start game', round);
+      this.props.gameStarted(round, userId);
     });
 
     this.socket.on('correct answer', () => {
@@ -173,7 +174,7 @@ const mapStateToProps = (state) => ({
   gameId: getGameId(state),
   roundId: getRoundId(state),
   nickname: getUserNickname(state),
-  isPlaying: getIsPlaying(state)
+  isPlaying: getIsPlaying(state),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -181,7 +182,7 @@ const mapDispatchToProps = dispatch => ({
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId)),
+  gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
   startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
 });
 
