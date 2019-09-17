@@ -1,25 +1,37 @@
 html {
   background-image: url('../assets/happytreesBG.png');
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center center;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-body {
-  background-image: url('../assets/happytreesBG.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  width: 100%;
-  height: 100%;
-}
-
-
 h1 {
   margin: auto;
   font-family: 'Chalkduster';
   text-align: center;
-  color: #000000;
-  font-size: 4em;
+  background: -webkit-linear-gradient( #10ABFF,#FF66C4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 5em;
+}
+@media screen and (max-width: 1080px) and (min-width: 360px) {
+ html {
+  background-image: url('../assets/HTmobileBG.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+ }
+ h1 {
+  margin: auto;
+  font-family: 'Chalkduster';
+  text-align: center;
+  background: -webkit-linear-gradient( #7ed957, #5CE1E6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 5em;
+}
 }

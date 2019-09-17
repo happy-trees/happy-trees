@@ -14,7 +14,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -25,12 +25,12 @@ class GamePage extends React.Component {
     stopListening: PropTypes.func.isRequired,
     receiveStroke: PropTypes.func.isRequired,
     joinedGame: PropTypes.func.isRequired,
-    gameStarted: PropTypes.func.isRequired,
     strokes: PropTypes.array.isRequired,
     userId: PropTypes.string.isRequired,
     isDrawing: PropTypes.bool.isRequired,
     gameId: PropTypes.string,
     roundId: PropTypes.string,
+    roundNumber: PropTypes.number,
     nickname: PropTypes.string,
     isPlaying: PropTypes.bool.isRequired,
     wrongAnswer: PropTypes.func,
@@ -76,12 +76,6 @@ class GamePage extends React.Component {
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
-    this.socket.on('start game', ({ round }) => {
-      const { userId } = this.props;
-      console.log('start game', round);
-      this.props.gameStarted(round, userId);
-    });
-
     this.socket.on('correct answer', ({ answer, nickname }) => {
       console.log('someone made a correct answer', answer, nickname);
       this.props.correctlyAnswered(answer, nickname);
@@ -97,9 +91,9 @@ class GamePage extends React.Component {
       this.setState({ countdown });
     });
 
-    this.socket.on('new round', ({ round }) => {
+    this.socket.on('new round', ({ round, drawer }) => {
       console.log('new round', round);
-      this.props.startNewRound(round, this.props.userId);
+      this.props.startNewRound(round, this.props.userId, drawer);
     });
 
     this.socket.on('round over', () => {
@@ -129,13 +123,13 @@ class GamePage extends React.Component {
 
   emitAnswer = (e) => {
     e.preventDefault();
-    const { gameId, roundId } = this.props;
+    const { gameId, roundId, roundNumber } = this.props;
     const { guess } = this.state;
     this.socket.emit('answer', {
       answer: guess,
       roundId,
       gameId,
-      currentRoundNumber: 1
+      currentRoundNumber: roundNumber
     });
     this.setState({ guess: '' });
     
@@ -184,6 +178,7 @@ const mapStateToProps = (state) => ({
   isDrawing: getIsDrawing(state),
   gameId: getGameId(state),
   roundId: getRoundId(state),
+  roundNumber: getRoundNumber(state),
   nickname: getUserNickname(state),
   isPlaying: getIsPlaying(state),
   guesses: getGuesses(state)
@@ -195,8 +190,7 @@ const mapDispatchToProps = dispatch => ({
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
   wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
-  gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
-  startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
+  startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer))
 });
 
 export default connect(
