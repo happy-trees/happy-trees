@@ -6,3 +6,4 @@ export const getIsPlaying = state => getSocketState(state).isPlaying;
 export const getGuesses = state => getSocketState(state).guesses;
 export const getCorrectWinner = state => getSocketState(state).winner;
 export const getRoundNumber = state => getSocketState(state).roundNumber;
+export const getCurrentDrawer = state => getSocketState(state).currentDrawer;

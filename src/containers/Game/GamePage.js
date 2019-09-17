@@ -7,14 +7,14 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber, getCurrentDrawer } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -36,7 +36,8 @@ class GamePage extends React.Component {
     wrongAnswer: PropTypes.func,
     guesses: PropTypes.array,
     correctlyAnswered: PropTypes.func,
-    startNewRound: PropTypes.func.isRequired
+    startNewRound: PropTypes.func.isRequired,
+    currentDrawer: PropTypes.string
   }
 
   state = {
@@ -92,7 +93,7 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('new round', ({ round, drawer }) => {
-      console.log('new round', round);
+      console.log('new round and drawer', round, drawer);
       this.props.startNewRound(round, this.props.userId, drawer);
     });
 
@@ -137,13 +138,13 @@ class GamePage extends React.Component {
   
   render() {
     const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying, guesses } = this.props;
+    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer } = this.props;
 
     return (
       <>
       <div className={styles.FullGame}>
         <h1>Happy Trees</h1>
-        <StatusBar nickname={nickname} time={time} />
+        <StatusBar nickname={nickname} time={time} currentDrawer={currentDrawer} />
         <div className={styles.Word}>
           <h3>W o r d</h3>
         </div>
@@ -169,6 +170,7 @@ class GamePage extends React.Component {
       </div>
       </>
     );
+    
   }
 }
 
@@ -181,7 +183,8 @@ const mapStateToProps = (state) => ({
   roundNumber: getRoundNumber(state),
   nickname: getUserNickname(state),
   isPlaying: getIsPlaying(state),
-  guesses: getGuesses(state)
+  guesses: getGuesses(state),
+  currentDrawer: getCurrentDrawer(state),
 });
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
