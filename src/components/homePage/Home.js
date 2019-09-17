@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PlayButton from './PlayButton';
+import styles from './Home.css';
 
 function Home({ nickname, avatar }) {
   return (
-    <>
-      <p>{nickname}</p>
-      <img src={avatar} />
+    <div className={styles.Home}>
+      <h1>{nickname}</h1>
+      <img className={styles.Avatar} src={avatar} />
       <PlayButton />
-    </>
+    </div>
   );
 }
 
