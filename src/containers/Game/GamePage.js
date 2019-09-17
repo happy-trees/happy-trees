@@ -42,7 +42,7 @@ class GamePage extends React.Component {
     guess: '',
   }
 
-  socket = io('http://localhost:3000');
+  socket = io('https://happy-trees-api.herokuapp.com/');
 
   componentDidMount() {
     const gameContainer = document.querySelector('#game-container');
