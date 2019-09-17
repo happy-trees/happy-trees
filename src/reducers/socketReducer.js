@@ -3,7 +3,7 @@ import {
   END_LISTENING,
   JOINED_GAME,
   GAME_STARTED,
-  GUEST_ANSWERED,
+  WRONG_ANSWER,
   CORRECTLY_ANSWERED,
   START_NEW_ROUND,
 } from '../actions/socketActions';
@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action) {
         isDrawing: action.payload.round.drawerId === action.payload.userId,
         roundId: action.payload.round._id,
       };
-    case GUEST_ANSWERED:
+    case WRONG_ANSWER:
       return { ...state, guesses: [...state.guesses, action.payload] };
     case CORRECTLY_ANSWERED:
       return { ...state, winner: action.payload };
