@@ -20,6 +20,18 @@ export const gameStarted = (round, userId) => ({
   payload: { round, userId }
 });
 
+export const WRONG_ANSWER = 'WRONG_ANSWER';
+export const wrongAnswer = (answer) => ({
+  type: WRONG_ANSWER,
+  payload: answer
+});
+
+export const CORRECTLY_ANSWERED = 'CORRECTLY_ANSWERED';
+export const correctylyAnswered = (answer, nickname) => ({
+  type: CORRECTLY_ANSWERED,
+  payload: { answer, nickname }
+});
+
 export const START_NEW_ROUND = 'START_NEW_ROUND';
 export const startNewRound = (round, userId) => ({
   type: START_NEW_ROUND,

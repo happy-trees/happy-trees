@@ -7,15 +7,16 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted, startNewRound } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
+import ModalStats from '../../components/modal/ModalStats';
 
 class GamePage extends React.Component {
 
@@ -32,6 +33,9 @@ class GamePage extends React.Component {
     roundId: PropTypes.string,
     nickname: PropTypes.string,
     isPlaying: PropTypes.bool.isRequired,
+    wrongAnswer: PropTypes.func,
+    guesses: PropTypes.array,
+    correctlyAnswered: PropTypes.func,
     startNewRound: PropTypes.func.isRequired
   }
 
@@ -65,7 +69,7 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('timer', ({ countdown, round }) => {
-      console.log('round timer', countdown, round);
+      console.log('round ',  round.roundNumber);
       this.setState({ time: countdown });
     });
 
@@ -77,13 +81,15 @@ class GamePage extends React.Component {
       this.props.gameStarted(round, userId);
     });
 
-    this.socket.on('correct answer', () => {
-      console.log('someone made a correct answer');
+    this.socket.on('correct answer', ({ answer, nickname }) => {
+      console.log('someone made a correct answer', answer, nickname);
+      this.props.correctlyAnswered(answer, nickname);
     });
 
-    this.socket.on('wrong answer', () => [
-      console.log('someone made a wrong answer')
-    ]);
+    this.socket.on('wrong answer', ({ answer }) => {
+      this.props.wrongAnswer(answer);
+      console.log('someone made a wrong answer');
+    });
 
     this.socket.on('intermission', ({ countdown }) => {
       console.log('intermission', countdown);
@@ -130,12 +136,13 @@ class GamePage extends React.Component {
       currentRoundNumber: 1
     });
     this.setState({ guess: '' });
+    
   }
   
   render() {
     const { canvasWidth, canvasHeight, time, guess } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying } = this.props;
-    
+    const { isDrawing, nickname, strokes, isPlaying, guesses } = this.props;
+
     return (
       <>
       <div className={styles.FullGame}>
@@ -161,6 +168,8 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
+        { time === 0 && <ModalStats nickname={nickname} guesses={guesses} guess={guess} /> }
+        
       </div>
       </>
     );
@@ -175,13 +184,15 @@ const mapStateToProps = (state) => ({
   roundId: getRoundId(state),
   nickname: getUserNickname(state),
   isPlaying: getIsPlaying(state),
+  guesses: getGuesses(state)
 });
-
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
+  wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
+  correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
   gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
   startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
 });
