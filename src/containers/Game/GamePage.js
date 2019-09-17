@@ -13,7 +13,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getIntervalId } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 
 class GamePage extends React.Component {
@@ -30,6 +30,7 @@ class GamePage extends React.Component {
     gameId: PropTypes.string,
     roundId: PropTypes.string,
     nickname: PropTypes.string,
+    intervalId: PropTypes.object,
     isPlaying: PropTypes.bool.isRequired,
     startNewRound: PropTypes.func.isRequired
   }
@@ -70,9 +71,10 @@ class GamePage extends React.Component {
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
-    this.socket.on('start game', (startRound) => {
+    this.socket.on('start game', ({ round, intervalId }) => {
       const { userId } = this.props;
-      this.props.gameStarted(startRound, userId);
+      console.log('start game', round, intervalId);
+      this.props.gameStarted(round, userId, intervalId);
     });
 
     this.socket.on('correct answer', () => {
@@ -119,13 +121,14 @@ class GamePage extends React.Component {
 
   emitAnswer = (e) => {
     e.preventDefault();
-    const { gameId, roundId } = this.props;
+    const { gameId, roundId, intervalId } = this.props;
     const { guess } = this.state;
     this.socket.emit('answer', {
       answer: guess,
       roundId,
       gameId,
-      currentRoundNumber: 1
+      currentRoundNumber: 1,
+      intervalId
     });
     this.setState({ guess: '' });
   }
@@ -168,7 +171,8 @@ const mapStateToProps = (state) => ({
   gameId: getGameId(state),
   roundId: getRoundId(state),
   nickname: getUserNickname(state),
-  isPlaying: getIsPlaying(state)
+  isPlaying: getIsPlaying(state),
+  intervalId: getIntervalId(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -176,7 +180,7 @@ const mapDispatchToProps = dispatch => ({
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId)),
+  gameStarted: (round, userId, intervalId) => dispatch(gameStarted(round, userId, intervalId)),
   startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
 });
 
