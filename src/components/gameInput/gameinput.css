@@ -31,3 +31,20 @@ section {
 .button {
   border-radius: 12px;
 }
+@media screen and (max-width: 1080px) and (min-width: 400px) {
+  .form {
+  display: flex;
+  /* margin: 0 15px 0 15px; */
+  justify-content: center;
+  padding: 3px;
+  background: linear-gradient(21deg, #10abff, #1beabd);
+  border-radius: 30px;
+  height: 50%;
+  }
+  .input {
+    width: 100%;
+    border: white;
+    border-radius: 12px;
+    color: purple;
+  }
+}
