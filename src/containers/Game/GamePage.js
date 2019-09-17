@@ -44,6 +44,7 @@ class GamePage extends React.Component {
     canvasHeight: null,
     time: null,
     guess: '',
+    countdown: null
   }
 
   socket = io('http://localhost:3000');
@@ -93,6 +94,7 @@ class GamePage extends React.Component {
 
     this.socket.on('intermission', ({ countdown }) => {
       console.log('intermission', countdown);
+      this.setState({ countdown });
     });
 
     this.socket.on('new round', ({ round }) => {
@@ -140,7 +142,7 @@ class GamePage extends React.Component {
   }
   
   render() {
-    const { canvasWidth, canvasHeight, time, guess } = this.state;
+    const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
     const { isDrawing, nickname, strokes, isPlaying, guesses } = this.props;
 
     return (
@@ -168,7 +170,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        { time === 0 && <ModalStats nickname={nickname} guesses={guesses} guess={guess} /> }
+        { time === 0 && <ModalStats nickname={nickname} countdown={countdown} guesses={guesses} /> }
         
       </div>
       </>
