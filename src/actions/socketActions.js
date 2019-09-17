@@ -20,9 +20,9 @@ export const gameStarted = (round, userId) => ({
   payload: { round, userId }
 });
 
-export const GUEST_ANSWERED = 'GUEST_ANSWERED';
+export const WRONG_ANSWER = 'WRONG_ANSWER';
 export const guestAnswered = (guess) => ({
-  type: GUEST_ANSWERED,
+  type: WRONG_ANSWER,
   payload: guess
 });
 
