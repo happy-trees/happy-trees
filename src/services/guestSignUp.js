@@ -1,7 +1,5 @@
-// import bobavblue from '../assets/avatars/bobavblue.png';
 import bobavgreen from '../assets/avatars/bobavgreen.png';
-// import bobavpink from '../assets/avatars/bobavpink.png';
-// import bobavpurple from '../assets/avatars/bobavpurple.png';
+
 
 
 export const guestSignUp = (nickname, avatar = bobavgreen) => {
