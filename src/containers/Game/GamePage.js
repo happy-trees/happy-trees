@@ -7,7 +7,7 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted, startNewRound, guestAnswered, correctylyAnswered } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
@@ -33,7 +33,7 @@ class GamePage extends React.Component {
     roundId: PropTypes.string,
     nickname: PropTypes.string,
     isPlaying: PropTypes.bool.isRequired,
-    guestAnswered: PropTypes.func,
+    wrongAnswer: PropTypes.func,
     guesses: PropTypes.array,
     correctlyAnswered: PropTypes.func,
     startNewRound: PropTypes.func.isRequired
@@ -86,9 +86,10 @@ class GamePage extends React.Component {
       this.props.correctlyAnswered(answer, nickname);
     });
 
-    this.socket.on('wrong answer', () => [
-      console.log('someone made a wrong answer')
-    ]);
+    this.socket.on('wrong answer', ({ answer }) => {
+      this.props.wrongAnswer(answer);
+      console.log('someone made a wrong answer');
+    });
 
     this.socket.on('intermission', ({ countdown }) => {
       console.log('intermission', countdown);
@@ -127,19 +128,16 @@ class GamePage extends React.Component {
   emitAnswer = (e) => {
     e.preventDefault();
     const { gameId, roundId } = this.props;
-    const { guess, answer, nickname } = this.state;
+    const { guess } = this.state;
     this.socket.emit('answer', {
       answer: guess,
       roundId,
       gameId,
       currentRoundNumber: 1
     });
-    this.props.guestAnswered(guess);
-    this.props.correctlyAnswered(answer, nickname);
     this.setState({ guess: '' });
     
   }
-
   
   render() {
     const { canvasWidth, canvasHeight, time, guess } = this.state;
@@ -193,7 +191,7 @@ const mapDispatchToProps = dispatch => ({
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  guestAnswered: (guess) => dispatch(guestAnswered(guess)),
+  wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
   gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
   startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
