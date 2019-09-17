@@ -15,6 +15,7 @@ const initialState = {
   isDrawing: false,
   roundId: null,
   roundNumber: null,
+  currentDrawer: '',
   guesses: [],
   winner: {}
 };
@@ -42,9 +43,11 @@ export default function reducer(state = initialState, action) {
     case START_NEW_ROUND:
       return {
         ...state,
+        isPlaying: true,
         isDrawing: action.payload.round.drawerId === action.payload.userId,
         roundId: action.payload.round._id,
-        roundNumber: action.payload.round.roundNumber
+        roundNumber: action.payload.round.roundNumber,
+        currentDrawer: action.payload.drawer.nickname
       };
     default:
       return state;

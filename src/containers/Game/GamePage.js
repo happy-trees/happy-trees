@@ -96,9 +96,9 @@ class GamePage extends React.Component {
       console.log('intermission', countdown);
     });
 
-    this.socket.on('new round', ({ round }) => {
+    this.socket.on('new round', ({ round, drawer }) => {
       console.log('new round', round);
-      this.props.startNewRound(round, this.props.userId);
+      this.props.startNewRound(round, this.props.userId, drawer);
     });
 
     this.socket.on('round over', () => {
@@ -196,7 +196,7 @@ const mapDispatchToProps = dispatch => ({
   wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
   gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
-  startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
+  startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer))
 });
 
 export default connect(

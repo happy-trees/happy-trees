@@ -33,7 +33,7 @@ export const correctylyAnswered = (answer, nickname) => ({
 });
 
 export const START_NEW_ROUND = 'START_NEW_ROUND';
-export const startNewRound = (round, userId) => ({
+export const startNewRound = (round, userId, drawer) => ({
   type: START_NEW_ROUND,
-  payload: { round, userId }
+  payload: { round, userId, drawer }
 });
