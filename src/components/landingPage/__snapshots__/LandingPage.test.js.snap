@@ -2,28 +2,38 @@
 
 exports[`LandingPage component renders App 1`] = `
 <div
-  className="LandingPage"
+  className="Full"
 >
-  <h1>
-    Choose Nickname:
+  <h1
+    className="Logo"
+  >
+    Happy Trees
   </h1>
   <div
-    className="Form"
+    className="LandingPage"
   >
-    <form
-      onSubmit={[Function]}
+    <h1>
+      Choose Nickname:
+    </h1>
+    <div
+      className="Form"
     >
-      <input
-        name="nickname"
-        onChange={[Function]}
-        placeholder="nickname..."
-        type="text"
-        value=""
-      />
-      <button>
-        Enter
-      </button>
-    </form>
+      <form
+        onSubmit={[Function]}
+      >
+        <input
+          name="nickname"
+          onChange={[Function]}
+          placeholder="nickname..."
+          type="text"
+          value=""
+        />
+        <br />
+        <button>
+          Enter
+        </button>
+      </form>
+    </div>
   </div>
 </div>
 `;
