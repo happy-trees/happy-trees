@@ -14,12 +14,6 @@ export const joinedGame = (gameId) => ({
   payload: gameId
 });
 
-export const GAME_STARTED = 'GAME_STARTED';
-export const gameStarted = (round, userId) => ({
-  type: GAME_STARTED,
-  payload: { round, userId }
-});
-
 export const WRONG_ANSWER = 'WRONG_ANSWER';
 export const wrongAnswer = (answer) => ({
   type: WRONG_ANSWER,

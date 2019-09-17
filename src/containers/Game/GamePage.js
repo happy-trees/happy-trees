@@ -25,7 +25,6 @@ class GamePage extends React.Component {
     stopListening: PropTypes.func.isRequired,
     receiveStroke: PropTypes.func.isRequired,
     joinedGame: PropTypes.func.isRequired,
-    gameStarted: PropTypes.func.isRequired,
     strokes: PropTypes.array.isRequired,
     userId: PropTypes.string.isRequired,
     isDrawing: PropTypes.bool.isRequired,
@@ -75,12 +74,6 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
-
-    this.socket.on('start game', ({ round }) => {
-      const { userId } = this.props;
-      console.log('start game', round);
-      this.props.gameStarted(round, userId);
-    });
 
     this.socket.on('correct answer', ({ answer, nickname }) => {
       console.log('someone made a correct answer', answer, nickname);
@@ -195,7 +188,6 @@ const mapDispatchToProps = dispatch => ({
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
   wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
-  gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
   startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer))
 });
 
