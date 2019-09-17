@@ -7,17 +7,16 @@ html {
   overflow: hidden;
 }
 
-
 h1 {
   margin: auto;
   font-family: 'Chalkduster';
   text-align: center;
-  background: -webkit-linear-gradient( #CB6CE6, #FF66C4,#3866FF);
+  background: -webkit-linear-gradient( #10ABFF,#FF66C4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 5em;
 }
-@media screen and (max-width: 1080px) and (min-width: 400px) {
+@media screen and (max-width: 1080px) and (min-width: 360px) {
  html {
   background-image: url('../assets/HTmobileBG.png');
   background-repeat: no-repeat;
@@ -26,4 +25,13 @@ h1 {
   height: 100%;
   overflow: hidden;
  }
+ h1 {
+  margin: auto;
+  font-family: 'Chalkduster';
+  text-align: center;
+  background: -webkit-linear-gradient( #7ed957, #5CE1E6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 5em;
+}
 }
