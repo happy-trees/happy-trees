@@ -14,7 +14,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -31,6 +31,7 @@ class GamePage extends React.Component {
     isDrawing: PropTypes.bool.isRequired,
     gameId: PropTypes.string,
     roundId: PropTypes.string,
+    roundNumber: PropTypes.number,
     nickname: PropTypes.string,
     isPlaying: PropTypes.bool.isRequired,
     wrongAnswer: PropTypes.func,
@@ -127,13 +128,13 @@ class GamePage extends React.Component {
 
   emitAnswer = (e) => {
     e.preventDefault();
-    const { gameId, roundId } = this.props;
+    const { gameId, roundId, roundNumber } = this.props;
     const { guess } = this.state;
     this.socket.emit('answer', {
       answer: guess,
       roundId,
       gameId,
-      currentRoundNumber: 1
+      currentRoundNumber: roundNumber
     });
     this.setState({ guess: '' });
     
@@ -182,6 +183,7 @@ const mapStateToProps = (state) => ({
   isDrawing: getIsDrawing(state),
   gameId: getGameId(state),
   roundId: getRoundId(state),
+  roundNumber: getRoundNumber(state),
   nickname: getUserNickname(state),
   isPlaying: getIsPlaying(state),
   guesses: getGuesses(state)

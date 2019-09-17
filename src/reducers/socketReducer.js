@@ -14,6 +14,7 @@ const initialState = {
   isPlaying: false,
   isDrawing: false,
   roundId: null,
+  roundNumber: null,
   guesses: [],
   winner: {}
 };
@@ -32,6 +33,7 @@ export default function reducer(state = initialState, action) {
         isPlaying: true,
         isDrawing: action.payload.round.drawerId === action.payload.userId,
         roundId: action.payload.round._id,
+        roundNumber: action.payload.round.roundNumber
       };
     case WRONG_ANSWER:
       return { ...state, guesses: [...state.guesses, action.payload] };
@@ -41,7 +43,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isDrawing: action.payload.round.drawerId === action.payload.userId,
-        roundId: action.payload.round._id
+        roundId: action.payload.round._id,
+        roundNumber: action.payload.round.roundNumber
       };
     default:
       return state;
