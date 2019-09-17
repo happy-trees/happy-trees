@@ -4,6 +4,7 @@ import {
   JOINED_GAME,
   GAME_STARTED,
   GUEST_ANSWERED,
+  CORRECTLY_ANSWERED,
 } from '../actions/socketActions';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   isDrawing: false,
   roundId: null,
   guesses: [],
+  answer: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -32,6 +34,8 @@ export default function reducer(state = initialState, action) {
       };
     case GUEST_ANSWERED:
       return { ...state, guesses: [...state.guesses, action.payload] };
+    case CORRECTLY_ANSWERED:
+      return { ...state, answer: action.payload };
     default:
       return state;
   }

@@ -6,14 +6,14 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted, guestAnswered, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -31,7 +31,10 @@ class GamePage extends React.Component {
     gameId: PropTypes.string,
     roundId: PropTypes.string,
     nickname: PropTypes.string,
-    isPlaying: PropTypes.bool.isRequired
+    isPlaying: PropTypes.bool.isRequired,
+    guestAnswered: PropTypes.func,
+    guesses: PropTypes.array,
+    correctlyAnswered: PropTypes.func
   }
 
   state = {
@@ -64,7 +67,7 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('timer', ({ countdown, round }) => {
-      console.log('round timer', countdown, round);
+      console.log('round ',  round.roundNumber);
       this.setState({ time: countdown });
     });
 
@@ -75,8 +78,9 @@ class GamePage extends React.Component {
       this.props.gameStarted(startRound, userId);
     });
 
-    this.socket.on('correct answer', () => {
-      console.log('someone made a correct answer');
+    this.socket.on('correct answer', ({ answer, nickname }) => {
+      console.log('someone made a correct answer', answer, nickname);
+      this.props.correctlyAnswered(answer, nickname);
     });
 
     this.socket.on('wrong answer', () => [
@@ -115,20 +119,24 @@ class GamePage extends React.Component {
   emitAnswer = (e) => {
     e.preventDefault();
     const { gameId, roundId } = this.props;
-    const { guess } = this.state;
+    const { guess, answer, nickname } = this.state;
     this.socket.emit('answer', {
       answer: guess,
       roundId,
       gameId,
       currentRoundNumber: 1
     });
+    this.props.guestAnswered(guess);
+    this.props.correctlyAnswered(answer, nickname);
     this.setState({ guess: '' });
+    
   }
+
   
   render() {
     const { canvasWidth, canvasHeight, time, guess } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying } = this.props;
-    
+    const { isDrawing, nickname, strokes, isPlaying, guesses } = this.props;
+
     return (
       <>
         <StatusBar nickname={nickname} time={time} />
@@ -150,7 +158,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        { time === 0 && <ModalStats nickname={nickname} guess={guess} /> }
+        { time === 0 && <ModalStats nickname={nickname} guesses={guesses} guess={guess} /> }
         
       </>
     );
@@ -164,15 +172,17 @@ const mapStateToProps = (state) => ({
   gameId: getGameId(state),
   roundId: getRoundId(state),
   nickname: getUserNickname(state),
-  isPlaying: getIsPlaying(state)
+  isPlaying: getIsPlaying(state),
+  guesses: getGuesses(state)
 });
-
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
   stopListening: () => dispatch(endListening()),
   receiveStroke: (data) => dispatch(receiveStroke(data)),
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
-  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId))
+  gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId)),
+  guestAnswered: (guess) => dispatch(guestAnswered(guess)),
+  correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname))
 });
 
 export default connect(

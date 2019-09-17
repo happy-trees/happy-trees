@@ -25,3 +25,9 @@ export const guestAnswered = (guess) => ({
   type: GUEST_ANSWERED,
   payload: guess
 });
+
+export const CORRECTLY_ANSWERED = 'CORRECTLY_ANSWERED';
+export const correctylyAnswered = (answer, nickname) => ({
+  type: CORRECTLY_ANSWERED,
+  payload: { answer, nickname }
+});

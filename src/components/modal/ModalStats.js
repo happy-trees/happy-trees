@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-function ModalStats({ nickname, guess }) {
+function ModalStats({ nickname, guess, guesses }) {
+  console.log(guesses);
   const [show, setShow] = useState(true);
 
   const handleClose = () => setShow(false);
+  const allGuesses = guesses.map((guess) => {
+    return <li key={Math.random()}>{guess}</li>;
+  });
 
   return (
     <>
@@ -14,7 +18,9 @@ function ModalStats({ nickname, guess }) {
 
         <Modal.Body>
           Winner {nickname} {'\n'}
-          Answer {guess}
+          <ul>
+            {allGuesses}
+          </ul>
         </Modal.Body>
 
         <Modal.Footer>
