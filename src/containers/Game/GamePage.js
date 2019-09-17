@@ -80,9 +80,9 @@ class GamePage extends React.Component {
       this.props.correctlyAnswered(answer, nickname);
     });
 
-    this.socket.on('wrong answer', ({ answer }) => {
+    this.socket.on('wrong answer', ({ answer, guessesLeft }) => {
       this.props.wrongAnswer(answer);
-      console.log('someone made a wrong answer');
+      console.log('someone made a wrong answer', answer, guessesLeft);
     });
 
     this.socket.on('intermission', ({ countdown }) => {
