@@ -4,3 +4,4 @@ export const getGameId = state => getSocketState(state).gameId;
 export const getRoundId = state => getSocketState(state).roundId;
 export const getIsPlaying = state => getSocketState(state).isPlaying;
 export const getGuesses = state => getSocketState(state).guesses;
+export const getRoundNumber = state => getSocketState(state).roundNumber;
