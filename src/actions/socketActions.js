@@ -15,9 +15,9 @@ export const joinedGame = (gameId) => ({
 });
 
 export const GAME_STARTED = 'GAME_STARTED';
-export const gameStarted = (round, userId, intervalId) => ({
+export const gameStarted = (round, userId) => ({
   type: GAME_STARTED,
-  payload: { round, userId, intervalId }
+  payload: { round, userId }
 });
 
 export const START_NEW_ROUND = 'START_NEW_ROUND';

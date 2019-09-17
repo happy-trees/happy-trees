@@ -12,7 +12,6 @@ const initialState = {
   isPlaying: false,
   isDrawing: false,
   roundId: null,
-  intervalId: null,
 };
 
 export default function reducer(state = initialState, action) {
@@ -29,7 +28,6 @@ export default function reducer(state = initialState, action) {
         isPlaying: true,
         isDrawing: action.payload.round.drawerId === action.payload.userId,
         roundId: action.payload.round._id,
-        intervalId: action.payload.intervalId
       };
     case START_NEW_ROUND:
       return {
