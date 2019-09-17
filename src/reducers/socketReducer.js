@@ -31,7 +31,7 @@ export default function reducer(state = initialState, action) {
         roundId: action.payload.startRound._id
       };
     case GUEST_ANSWERED:
-      return { ...state, guesses: action.payload };
+      return { ...state, guesses: [...state.guesses, action.payload] };
     default:
       return state;
   }

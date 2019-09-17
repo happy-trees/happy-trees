@@ -21,7 +21,7 @@ export const gameStarted = (startRound, userId) => ({
 });
 
 export const GUEST_ANSWERED = 'GUEST_ANSWERED';
-export const guestAnswered = guess => ({
+export const guestAnswered = (guess) => ({
   type: GUEST_ANSWERED,
   payload: guess
 });
