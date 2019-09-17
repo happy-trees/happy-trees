@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './game.css';
+
+import styles from './FullGame.css';
 
 import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted, guestAnswered, correctylyAnswered } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, gameStarted, startNewRound, guestAnswered, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
@@ -34,7 +35,8 @@ class GamePage extends React.Component {
     isPlaying: PropTypes.bool.isRequired,
     guestAnswered: PropTypes.func,
     guesses: PropTypes.array,
-    correctlyAnswered: PropTypes.func
+    correctlyAnswered: PropTypes.func,
+    startNewRound: PropTypes.func.isRequired
   }
 
   state = {
@@ -93,10 +95,15 @@ class GamePage extends React.Component {
 
     this.socket.on('new round', ({ round }) => {
       console.log('new round', round);
+      this.props.startNewRound(round, this.props.userId);
     });
 
     this.socket.on('round over', () => {
       console.log('round over');
+    });
+
+    this.socket.on('game over', () => {
+      console.log('game over');
     });
   }
 
@@ -139,8 +146,12 @@ class GamePage extends React.Component {
 
     return (
       <>
+      <div className={styles.FullGame}>
+        <h1>Happy Trees</h1>
         <StatusBar nickname={nickname} time={time} />
-      
+        <div className={styles.Word}>
+          <h3>W o r d</h3>
+        </div>
         <div id="game-container" className={styles.GameContainer}>
           <P5Wrapper 
             sketch={sketch} 
@@ -160,6 +171,7 @@ class GamePage extends React.Component {
         />}
         { time === 0 && <ModalStats nickname={nickname} guesses={guesses} guess={guess} /> }
         
+      </div>
       </>
     );
   }
@@ -182,7 +194,8 @@ const mapDispatchToProps = dispatch => ({
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
   gameStarted: (startRound, userId) => dispatch(gameStarted(startRound, userId)),
   guestAnswered: (guess) => dispatch(guestAnswered(guess)),
-  correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname))
+  correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
+  startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
 });
 
 export default connect(
