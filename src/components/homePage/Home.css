@@ -1,0 +1,16 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+
+
+
+    .Avatar {
+        height: 100px;
+        width: 100px;
+        margin: 5vw;
+    }
+}

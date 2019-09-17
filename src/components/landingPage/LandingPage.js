@@ -7,7 +7,7 @@ function LandingPage({ handleSubmit, nickname, handleUpdate }) {
   return (
     <div className={styles.LandingPage}>
       <h1>Choose Nickname:</h1>
-      <div classNAme={styles.Form}>
+      <div className={styles.Form}>
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 
