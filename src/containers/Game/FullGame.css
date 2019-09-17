@@ -13,12 +13,13 @@
         text-align: center;
         display: flex;
         flex-direction: row;
-        height: 2vh;
+        height: 1.5vh;
         font-family: 'Gloria Hallelujah', cursive;
         font-size: 1em;
         text-decoration: underline;
         margin-bottom: 4vh;
         margin-top: 4vh;
+
     }
 
     .GameContainer {

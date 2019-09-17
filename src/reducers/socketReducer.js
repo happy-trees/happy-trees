@@ -2,7 +2,6 @@ import {
   BEGIN_LISTENING,
   END_LISTENING,
   JOINED_GAME,
-  GAME_STARTED,
   WRONG_ANSWER,
   CORRECTLY_ANSWERED,
   START_NEW_ROUND,
@@ -15,8 +14,9 @@ const initialState = {
   isDrawing: false,
   roundId: null,
   roundNumber: null,
+  currentDrawer: '',
   guesses: [],
-  winner: {}
+  winner: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -27,14 +27,6 @@ export default function reducer(state = initialState, action) {
       return { ...state, listening: false };
     case JOINED_GAME:
       return { ...state, gameId: action.payload };
-    case GAME_STARTED:
-      return { 
-        ...state, 
-        isPlaying: true,
-        isDrawing: action.payload.round.drawerId === action.payload.userId,
-        roundId: action.payload.round._id,
-        roundNumber: action.payload.round.roundNumber
-      };
     case WRONG_ANSWER:
       return { ...state, guesses: [...state.guesses, action.payload] };
     case CORRECTLY_ANSWERED:
@@ -42,9 +34,12 @@ export default function reducer(state = initialState, action) {
     case START_NEW_ROUND:
       return {
         ...state,
+        isPlaying: true,
         isDrawing: action.payload.round.drawerId === action.payload.userId,
         roundId: action.payload.round._id,
-        roundNumber: action.payload.round.roundNumber
+        roundNumber: action.payload.round.roundNumber,
+        currentDrawer: action.payload.drawer.nickname,
+        guesses: []
       };
     default:
       return state;

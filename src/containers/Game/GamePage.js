@@ -7,14 +7,14 @@ import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, gameStarted, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber, getCurrentDrawer } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -25,7 +25,6 @@ class GamePage extends React.Component {
     stopListening: PropTypes.func.isRequired,
     receiveStroke: PropTypes.func.isRequired,
     joinedGame: PropTypes.func.isRequired,
-    gameStarted: PropTypes.func.isRequired,
     strokes: PropTypes.array.isRequired,
     userId: PropTypes.string.isRequired,
     isDrawing: PropTypes.bool.isRequired,
@@ -37,7 +36,8 @@ class GamePage extends React.Component {
     wrongAnswer: PropTypes.func,
     guesses: PropTypes.array,
     correctlyAnswered: PropTypes.func,
-    startNewRound: PropTypes.func.isRequired
+    startNewRound: PropTypes.func.isRequired,
+    currentDrawer: PropTypes.string
   }
 
   state = {
@@ -45,6 +45,7 @@ class GamePage extends React.Component {
     canvasHeight: null,
     time: null,
     guess: '',
+    countdown: null
   }
 
   socket = io('http://localhost:3000');
@@ -76,12 +77,6 @@ class GamePage extends React.Component {
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
-    this.socket.on('start game', ({ round }) => {
-      const { userId } = this.props;
-      console.log('start game', round);
-      this.props.gameStarted(round, userId);
-    });
-
     this.socket.on('correct answer', ({ answer, nickname }) => {
       console.log('someone made a correct answer', answer, nickname);
       this.props.correctlyAnswered(answer, nickname);
@@ -94,11 +89,12 @@ class GamePage extends React.Component {
 
     this.socket.on('intermission', ({ countdown }) => {
       console.log('intermission', countdown);
+      this.setState({ countdown });
     });
 
-    this.socket.on('new round', ({ round }) => {
-      console.log('new round', round);
-      this.props.startNewRound(round, this.props.userId);
+    this.socket.on('new round', ({ round, drawer }) => {
+      console.log('new round and drawer', round, drawer);
+      this.props.startNewRound(round, this.props.userId, drawer);
     });
 
     this.socket.on('round over', () => {
@@ -141,14 +137,14 @@ class GamePage extends React.Component {
   }
   
   render() {
-    const { canvasWidth, canvasHeight, time, guess } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying, guesses } = this.props;
+    const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
+    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer } = this.props;
 
     return (
       <>
       <div className={styles.FullGame}>
         <h1>Happy Trees</h1>
-        <StatusBar nickname={nickname} time={time} />
+        <StatusBar nickname={nickname} time={time} currentDrawer={currentDrawer} />
         <div className={styles.Word}>
           <h3>W o r d</h3>
         </div>
@@ -169,11 +165,12 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        { time === 0 && <ModalStats nickname={nickname} guesses={guesses} guess={guess} /> }
+        { time === 0 && <ModalStats nickname={nickname} countdown={countdown} guesses={guesses} /> }
         
       </div>
       </>
     );
+    
   }
 }
 
@@ -186,7 +183,8 @@ const mapStateToProps = (state) => ({
   roundNumber: getRoundNumber(state),
   nickname: getUserNickname(state),
   isPlaying: getIsPlaying(state),
-  guesses: getGuesses(state)
+  guesses: getGuesses(state),
+  currentDrawer: getCurrentDrawer(state),
 });
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
@@ -195,8 +193,7 @@ const mapDispatchToProps = dispatch => ({
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
   wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
-  gameStarted: (round, userId) => dispatch(gameStarted(round, userId)),
-  startNewRound: (round, userId) => dispatch(startNewRound(round, userId))
+  startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer))
 });
 
 export default connect(

@@ -11,7 +11,9 @@ body {
   height: 100%;
   overflow: hidden;
 }
-
+html body {
+  background: transparent;
+}
 h1 {
   margin: auto;
   font-family: 'Chalkduster';
