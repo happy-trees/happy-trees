@@ -4,8 +4,8 @@ import { Modal, Button } from 'react-bootstrap';
 function ModalStats({ nickname, guess, guesses }) {
   console.log(guesses);
   const [show, setShow] = useState(true);
-
   const handleClose = () => setShow(false);
+  
   const allGuesses = guesses.map((guess) => {
     return <li key={Math.random()}>{guess}</li>;
   });
