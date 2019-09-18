@@ -31,7 +31,21 @@ exports[`StatusBar renders Status Bar component 1`] = `
     </div>
     <div
       className="colorPicker"
-    />
+    >
+      <label
+        className="brushTitle"
+        htmlFor="color"
+      >
+        Brush Color
+      </label>
+      <input
+        className="brushBar"
+        id="color"
+        name="color"
+        type="color"
+        value="#000000"
+      />
+    </div>
   </div>
 </Fragment>
 `;
