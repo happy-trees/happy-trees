@@ -18,7 +18,8 @@ const initialState = {
   currentDrawer: '',
   guesses: [],
   winner: {},
-  isIntermission: false
+  isIntermission: false,
+  guessesLeft: 3
 };
 
 export default function reducer(state = initialState, action) {
@@ -30,7 +31,13 @@ export default function reducer(state = initialState, action) {
     case JOINED_GAME:
       return { ...state, gameId: action.payload };
     case WRONG_ANSWER:
-      return { ...state, guesses: [...state.guesses, action.payload] };
+      return { 
+        ...state, 
+        guesses: [...state.guesses, action.payload.answer],
+        guessesLeft: action.payload.isUsersGuess 
+          ? state.guessesLeft - 1 
+          : state.guessesLeft
+      };
     case CORRECTLY_ANSWERED:
       return { ...state, winner: action.payload, isIntermission: true };
     case START_NEW_ROUND:
@@ -43,7 +50,8 @@ export default function reducer(state = initialState, action) {
         currentDrawer: action.payload.drawer.nickname,
         guesses: [],
         winner: {},
-        isIntermission: false
+        isIntermission: false,
+        guessesLeft: 3
       };
     case ROUND_OVER:
       return { ...state, isIntermission: true };
