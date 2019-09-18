@@ -2,8 +2,10 @@ import {
   BEGIN_LISTENING,
   END_LISTENING,
   JOINED_GAME,
-  GAME_STARTED,
+  WRONG_ANSWER,
+  CORRECTLY_ANSWERED,
   START_NEW_ROUND,
+  ROUND_OVER
 } from '../actions/socketActions';
 
 const initialState = {
@@ -12,6 +14,12 @@ const initialState = {
   isPlaying: false,
   isDrawing: false,
   roundId: null,
+  roundNumber: null,
+  currentDrawer: '',
+  guesses: [],
+  winner: null,
+  isIntermission: false,
+  guessesLeft: 3
 };
 
 export default function reducer(state = initialState, action) {
@@ -22,19 +30,31 @@ export default function reducer(state = initialState, action) {
       return { ...state, listening: false };
     case JOINED_GAME:
       return { ...state, gameId: action.payload };
-    case GAME_STARTED:
+    case WRONG_ANSWER:
       return { 
         ...state, 
-        isPlaying: true,
-        isDrawing: action.payload.round.drawerId === action.payload.userId,
-        roundId: action.payload.round._id,
+        guesses: [...state.guesses, action.payload.answer],
+        guessesLeft: action.payload.isUsersGuess 
+          ? state.guessesLeft - 1 
+          : state.guessesLeft
       };
+    case CORRECTLY_ANSWERED:
+      return { ...state, winner: action.payload, isIntermission: true };
     case START_NEW_ROUND:
       return {
         ...state,
-        isDrawing: action.payload.round.drawerId === action.payload.userId,
-        roundId: action.payload.round._id
+        isPlaying: true,
+        isDrawing: action.payload.round.drawer === action.payload.userId,
+        roundId: action.payload.round._id,
+        roundNumber: action.payload.round.roundNumber,
+        currentDrawer: action.payload.drawer.nickname,
+        guesses: [],
+        winner: null,
+        isIntermission: false,
+        guessesLeft: 3
       };
+    case ROUND_OVER:
+      return { ...state, isIntermission: true };
     default:
       return state;
   }

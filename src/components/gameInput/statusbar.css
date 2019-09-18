@@ -25,10 +25,28 @@
 .round {
   flex-wrap: wrap;
   margin: auto;
+  .roundColor {
+    flex-wrap: wrap;
+    margin: auto;
+    flex-direction: row;
+    color: #3866FF;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
 }
 .timerContainer {
   flex-wrap: wrap;
   margin: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  .timeColor {
+    flex-wrap: wrap;
+    margin: auto;
+    flex-direction: row;
+    color: purple;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
 }
 .artistAndColor {
   display: flex;
@@ -38,6 +56,14 @@
 .currentArtist {
   flex-wrap: wrap;
   margin: auto;
+  .drawerColor {
+    flex-wrap: wrap;
+    margin: auto;
+    flex-direction: row;
+    color: #FF66C4;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
 }
 .colorPicker {
   flex-wrap: wrap;

@@ -14,14 +14,25 @@ export const joinedGame = (gameId) => ({
   payload: gameId
 });
 
-export const GAME_STARTED = 'GAME_STARTED';
-export const gameStarted = (round, userId) => ({
-  type: GAME_STARTED,
-  payload: { round, userId }
+export const WRONG_ANSWER = 'WRONG_ANSWER';
+export const wrongAnswer = (answer, isUsersGuess) => ({
+  type: WRONG_ANSWER,
+  payload: { answer, isUsersGuess }
+});
+
+export const CORRECTLY_ANSWERED = 'CORRECTLY_ANSWERED';
+export const correctylyAnswered = (answer, nickname) => ({
+  type: CORRECTLY_ANSWERED,
+  payload: { answer, nickname }
 });
 
 export const START_NEW_ROUND = 'START_NEW_ROUND';
-export const startNewRound = (round, userId) => ({
+export const startNewRound = (round, userId, drawer) => ({
   type: START_NEW_ROUND,
-  payload: { round, userId }
+  payload: { round, userId, drawer }
+});
+
+export const ROUND_OVER = 'ROUND_OVER';
+export const roundOver = () => ({
+  type: ROUND_OVER
 });

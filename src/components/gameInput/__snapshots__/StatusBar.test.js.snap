@@ -8,17 +8,26 @@ exports[`StatusBar renders Status Bar component 1`] = `
     <div
       className="round"
     >
-      1 of 5
+      Round
+      <div
+        className="roundColor"
+      />
     </div>
     <div
       className="timerContainer"
     >
-      timer: 
+      timer
+      <div
+        className="timeColor"
+      />
     </div>
     <div
       className="currentArtist"
     >
-      Drawer: 
+      Drawer
+      <div
+        className="drawerColor"
+      />
     </div>
     <div
       className="colorPicker"
