@@ -10,7 +10,7 @@ export default function sketch(p){
   };
 
   p.mouseDragged = () => {
-    if(props.isDrawing) {
+    if(props.isDrawing && !props.isIntermission) {
       p.stroke(0, 0, 0);
       p.strokeWeight(5);
       p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
