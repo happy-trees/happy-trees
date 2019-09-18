@@ -8,9 +8,18 @@ function ModalStats({ nickname, countdown, guesses, roundWinner }) {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   
-  const allGuesses = guesses.map((guess) => {
-    return <li key={Math.random()}>{guess}</li>;
+  const allGuesses = guesses.map((guess, i) => {
+    return <li key={i}>{guess}</li>;
   });
+
+  const hasRoundWinner = () => {
+    if(roundWinner) {
+      return <> 
+        <p>Winner: {roundWinner.nickname} </p> 
+        <p>Answer: {roundWinner.answer} </p> 
+      </>;
+    }
+  };
 
   return (
     <>
@@ -19,13 +28,15 @@ function ModalStats({ nickname, countdown, guesses, roundWinner }) {
         <div className={styles.modal}>
           <Modal.Title><h1 className={styles.modalHeader}>Round Stats</h1></Modal.Title>
           <Modal.Body>
-            <p>Winner: {roundWinner.nickname} {'\n'} </p>
-            <p>Answer: {roundWinner.answer}</p>
+
+            {hasRoundWinner()}
+
             Other guesses: 
             <ul> 
               {allGuesses}
             </ul>
             <p>Get Ready, next round in: {countdown}</p>
+
           </Modal.Body>
 
           <Modal.Footer>
