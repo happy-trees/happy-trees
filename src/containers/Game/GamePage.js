@@ -178,6 +178,7 @@ class GamePage extends React.Component {
             emitStroke={this.emitStroke}
             strokes={strokes}
             isDrawing={isDrawing}
+            isIntermission={isIntermission}
           />
         </div>
 
