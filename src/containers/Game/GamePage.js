@@ -50,7 +50,8 @@ class GamePage extends React.Component {
     canvasHeight: null,
     time: null,
     guess: '',
-    countdown: null
+    countdown: null,
+    color: '#000000'
   }
 
   socket = io('http://localhost:3000');
@@ -131,6 +132,7 @@ class GamePage extends React.Component {
 
   emitStroke = (data) => {
     const { gameId } = this.props;
+    data.color = this.state.color;
     this.props.receiveStroke(data);
     this.socket.emit('stroke', { data, gameId });
   }
@@ -150,7 +152,7 @@ class GamePage extends React.Component {
   }
   
   render() {
-    const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
+    const { canvasWidth, canvasHeight, time, guess, countdown, color } = this.state;
     const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer,
       roundWinner, roundNumber, isIntermission, guessesLeft,
     } = this.props;
@@ -160,10 +162,13 @@ class GamePage extends React.Component {
       <div className={styles.FullGame}>
         <h1>Happy Trees</h1>
 
-        <StatusBar nickname={nickname}
+        <StatusBar 
+          nickname={nickname}
           roundNumber={roundNumber}
           time={time} 
-          currentDrawer={currentDrawer} />
+          currentDrawer={currentDrawer} 
+          handleChange={this.handleChange}
+        />
 
         <div className={styles.Word}>
           <h3>W o r d</h3>
@@ -172,7 +177,7 @@ class GamePage extends React.Component {
         <div id="game-container" className={styles.GameContainer}>
           <P5Wrapper 
             sketch={sketch} 
-            color={'#000000'} 
+            color={color} 
             canvasWidth={canvasWidth} 
             canvasHeight={canvasHeight}
             emitStroke={this.emitStroke}
