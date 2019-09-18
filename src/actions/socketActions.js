@@ -15,9 +15,9 @@ export const joinedGame = (gameId) => ({
 });
 
 export const WRONG_ANSWER = 'WRONG_ANSWER';
-export const wrongAnswer = (answer) => ({
+export const wrongAnswer = (answer, isUsersGuess) => ({
   type: WRONG_ANSWER,
-  payload: answer
+  payload: { answer, isUsersGuess }
 });
 
 export const CORRECTLY_ANSWERED = 'CORRECTLY_ANSWERED';
