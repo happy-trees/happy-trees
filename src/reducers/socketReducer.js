@@ -5,7 +5,8 @@ import {
   WRONG_ANSWER,
   CORRECTLY_ANSWERED,
   START_NEW_ROUND,
-  ROUND_OVER
+  ROUND_OVER,
+  GAME_OVER
 } from '../actions/socketActions';
 
 const initialState = {
@@ -55,6 +56,8 @@ export default function reducer(state = initialState, action) {
       };
     case ROUND_OVER:
       return { ...state, isIntermission: true };
+    case GAME_OVER:
+      return { ...state, isPlaying: false };
     default:
       return state;
   }

@@ -36,3 +36,9 @@ export const ROUND_OVER = 'ROUND_OVER';
 export const roundOver = () => ({
   type: ROUND_OVER
 });
+
+export const GAME_OVER = 'GAME OVER';
+export const gameOver = (scores) => ({
+  type: GAME_OVER,
+  payload: scores
+});

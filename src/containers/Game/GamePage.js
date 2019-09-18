@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
 import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer,
-  correctylyAnswered, roundOver } from '../../actions/socketActions';
+  correctylyAnswered, roundOver, gameOver } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
@@ -42,6 +42,7 @@ class GamePage extends React.Component {
     roundWinner: PropTypes.object,
     isIntermission: PropTypes.bool,
     roundOver: PropTypes.func,
+    gameOver: PropTypes.func.isRequired,
     guessesLeft: PropTypes.number.isRequired
   }
 
@@ -110,11 +111,8 @@ class GamePage extends React.Component {
       console.log('round over');
     });
 
-    this.socket.on('game over', () => {
-      console.log('game over');
-    });
-
     this.socket.on('game scores', ({ scores }) => {
+      this.props.gameOver(scores);
       console.log('game scores', scores);
     });
   }
@@ -193,7 +191,9 @@ class GamePage extends React.Component {
           roundWinner={roundWinner}
           nickname={nickname} 
           countdown={countdown}
-          guesses={guesses} /> }
+          guesses={guesses} 
+          isPlaying={isPlaying}
+        /> }
         
       </div>
       </>
@@ -226,6 +226,7 @@ const mapDispatchToProps = dispatch => ({
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
   startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer)),
   roundOver: () => dispatch(roundOver()),
+  gameOver: (scores) => dispatch(gameOver(scores))
 });
 
 export default connect(
