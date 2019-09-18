@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isPlaying: true,
-        isDrawing: action.payload.round.drawerId === action.payload.userId,
+        isDrawing: action.payload.round.drawer === action.payload.userId,
         roundId: action.payload.round._id,
         roundNumber: action.payload.round.roundNumber,
         currentDrawer: action.payload.drawer.nickname,

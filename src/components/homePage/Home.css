@@ -6,11 +6,9 @@
     align-items: center;
     justify-content: center;
 
-
-
     .Avatar {
-        height: 100px;
-        width: 100px;
-        margin: 5vw;
+        height: 30vh;
+        width: auto;
+        margin: 3vw;
     }
 }
