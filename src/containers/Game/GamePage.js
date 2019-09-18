@@ -14,7 +14,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber, getCurrentDrawer } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber, getCurrentDrawer, getCorrectWinner } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -37,7 +37,8 @@ class GamePage extends React.Component {
     guesses: PropTypes.array,
     correctlyAnswered: PropTypes.func,
     startNewRound: PropTypes.func.isRequired,
-    currentDrawer: PropTypes.string
+    currentDrawer: PropTypes.string,
+    roundWinner: PropTypes.object,
   }
 
   state = {
@@ -138,8 +139,8 @@ class GamePage extends React.Component {
   
   render() {
     const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer } = this.props;
-
+    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer, roundWinner } = this.props;
+    
     return (
       <>
       <div className={styles.FullGame}>
@@ -165,7 +166,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        { time === 0 && <ModalStats nickname={nickname} countdown={countdown} guesses={guesses} /> }
+        { time === 0 && <ModalStats roundWinner={roundWinner} nickname={nickname} countdown={countdown} guesses={guesses} /> }
         
       </div>
       </>
@@ -185,6 +186,7 @@ const mapStateToProps = (state) => ({
   isPlaying: getIsPlaying(state),
   guesses: getGuesses(state),
   currentDrawer: getCurrentDrawer(state),
+  roundWinner: getCorrectWinner(state),
 });
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),

@@ -39,7 +39,8 @@ export default function reducer(state = initialState, action) {
         roundId: action.payload.round._id,
         roundNumber: action.payload.round.roundNumber,
         currentDrawer: action.payload.drawer.nickname,
-        guesses: []
+        guesses: [],
+        winner: {}
       };
     default:
       return state;
