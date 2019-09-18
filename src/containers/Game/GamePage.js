@@ -105,6 +105,10 @@ class GamePage extends React.Component {
     this.socket.on('game over', () => {
       console.log('game over');
     });
+
+    this.socket.on('game scores', ({ scores }) => {
+      console.log('game scores', scores);
+    });
   }
 
   componentWillUnmount() {
