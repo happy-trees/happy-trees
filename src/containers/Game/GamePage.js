@@ -1,20 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import styles from './FullGame.css';
-
 import P5Wrapper from 'react-p5-wrapper';
 import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
-import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer, correctylyAnswered } from '../../actions/socketActions';
+import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer,
+  correctylyAnswered, roundOver } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
 
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
-import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses, getRoundNumber, getCurrentDrawer, getCorrectWinner } from '../../selectors/socketSelectors';
+import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses,
+  getRoundNumber, getCurrentDrawer, getCorrectWinner, getIsIntermission,
+} from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
 
@@ -39,6 +40,8 @@ class GamePage extends React.Component {
     startNewRound: PropTypes.func.isRequired,
     currentDrawer: PropTypes.string,
     roundWinner: PropTypes.object,
+    isIntermission: PropTypes.bool,
+    roundOver: PropTypes.func,
   }
 
   state = {
@@ -83,9 +86,10 @@ class GamePage extends React.Component {
       this.props.correctlyAnswered(answer, nickname);
     });
 
-    this.socket.on('wrong answer', ({ answer, guessesLeft }) => {
+    this.socket.on('wrong answer', ({ answer, guessesLeft, nickname, userId }) => {
       this.props.wrongAnswer(answer);
       console.log('someone made a wrong answer', answer, guessesLeft);
+      console.log('nickname, userid', nickname, userId);
     });
 
     this.socket.on('intermission', ({ countdown }) => {
@@ -99,6 +103,7 @@ class GamePage extends React.Component {
     });
 
     this.socket.on('round over', () => {
+      this.props.roundOver();
       console.log('round over');
     });
 
@@ -143,16 +148,24 @@ class GamePage extends React.Component {
   
   render() {
     const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
-    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer, roundWinner } = this.props;
+    const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer,
+      roundWinner, roundNumber, isIntermission,
+    } = this.props;
     
     return (
       <>
       <div className={styles.FullGame}>
         <h1>Happy Trees</h1>
-        <StatusBar nickname={nickname} time={time} currentDrawer={currentDrawer} />
+
+        <StatusBar nickname={nickname}
+          roundNumber={roundNumber}
+          time={time} 
+          currentDrawer={currentDrawer} />
+
         <div className={styles.Word}>
           <h3>W o r d</h3>
         </div>
+
         <div id="game-container" className={styles.GameContainer}>
           <P5Wrapper 
             sketch={sketch} 
@@ -164,14 +177,19 @@ class GamePage extends React.Component {
             isDrawing={isDrawing}
           />
         </div>
+
         {isPlaying && !isDrawing && <GameInput 
           guesses={3}
           guess={guess}
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        
-        {time === 0 && <ModalStats roundWinner={roundWinner} nickname={nickname} countdown={countdown} guesses={guesses} /> }
+
+        { isIntermission && <ModalStats
+          roundWinner={roundWinner}
+          nickname={nickname} 
+          countdown={countdown}
+          guesses={guesses} /> }
         
       </div>
       </>
@@ -192,6 +210,7 @@ const mapStateToProps = (state) => ({
   guesses: getGuesses(state),
   currentDrawer: getCurrentDrawer(state),
   roundWinner: getCorrectWinner(state),
+  isIntermission: getIsIntermission(state)
 });
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),
@@ -200,7 +219,8 @@ const mapDispatchToProps = dispatch => ({
   joinedGame: (gameId) => dispatch(joinedGame(gameId)),
   wrongAnswer: (answer) => dispatch(wrongAnswer(answer)),
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
-  startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer))
+  startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer)),
+  roundOver: () => dispatch(roundOver()),
 });
 
 export default connect(
