@@ -17,7 +17,7 @@ const initialState = {
   roundNumber: null,
   currentDrawer: '',
   guesses: [],
-  winner: {},
+  winner: null,
   isIntermission: false,
   guessesLeft: 3
 };
@@ -49,7 +49,7 @@ export default function reducer(state = initialState, action) {
         roundNumber: action.payload.round.roundNumber,
         currentDrawer: action.payload.drawer.nickname,
         guesses: [],
-        winner: {},
+        winner: null,
         isIntermission: false,
         guessesLeft: 3
       };
