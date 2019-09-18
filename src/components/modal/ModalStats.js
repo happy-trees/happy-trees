@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
+import styles from './modal.css';
 
 function ModalStats({ nickname, countdown, guesses, roundWinner }) {
   
@@ -15,25 +16,25 @@ function ModalStats({ nickname, countdown, guesses, roundWinner }) {
     <>
       <Modal show={show} backdrop={'static'} keyboard={false} onHide={handleClose}>
 
-        <Modal.Title>Round Stats</Modal.Title>
-
-        <Modal.Body>
-          <p>Winner: {roundWinner.nickname} {'\n'} </p>
-          <p>Answer: {roundWinner.answer}</p>
+        <div className={styles.modal}>
+          <Modal.Title><h1 className={styles.modalHeader}>Round Stats</h1></Modal.Title>
+          <Modal.Body>
+            <p>Winner: {roundWinner.nickname} {'\n'} </p>
+            <p>Answer: {roundWinner.answer}</p>
             Other guesses: 
-          <ul> 
-            {allGuesses}
-          </ul>
-          <p>Get Ready, next round in: {countdown}</p>
-        </Modal.Body>
+            <ul> 
+              {allGuesses}
+            </ul>
+            <p>Get Ready, next round in: {countdown}</p>
+          </Modal.Body>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Modal.Footer>
+            <Button className={styles.modalButton} variant="secondary" onClick={handleClose}>
             Close
-          </Button>
+            </Button>
           
-        </Modal.Footer>
-
+          </Modal.Footer>
+        </div>
       </Modal>
     </>
   );
