@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 
-function ModalStats({ nickname, countdown, guesses }) {
+function ModalStats({ nickname, countdown, guesses, roundWinner }) {
   
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
@@ -18,7 +18,8 @@ function ModalStats({ nickname, countdown, guesses }) {
         <Modal.Title>Round Stats</Modal.Title>
 
         <Modal.Body>
-          <p>Winner {nickname} {'\n'} </p>
+          <p>Winner: {roundWinner.nickname} {'\n'} </p>
+          <p>Answer: {roundWinner.answer}</p>
             Other guesses: 
           <ul> 
             {allGuesses}
@@ -41,6 +42,7 @@ function ModalStats({ nickname, countdown, guesses }) {
 ModalStats.propTypes = {
   guesses: PropTypes.array,
   countdown: PropTypes.number,
+  roundWinner: PropTypes.object,
 };
 
 export default ModalStats;
