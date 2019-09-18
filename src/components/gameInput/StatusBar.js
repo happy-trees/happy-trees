@@ -11,8 +11,8 @@ function StatusBar({ handleChange, time, currentDrawer, roundNumber }) {
       <div className={styles.timerContainer}>timer<div className={styles.timeColor}>{time}</div></div>
       <div className={styles.currentArtist}>Drawer<div className={styles.drawerColor}>{currentDrawer}</div></div>
       <div className={styles.colorPicker}>
-        {/* <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
-        <input className={styles.brushBar} type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange}/> */}
+        <label className={styles.brushTitle}htmlFor="color">Brush Color</label>
+        <input className={styles.brushBar} type="color" id="color" name="color" value="#000000" onChange={handleChange}/>
       </div>
     </div>
     </>
