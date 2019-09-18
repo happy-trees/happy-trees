@@ -5,6 +5,7 @@ import {
   WRONG_ANSWER,
   CORRECTLY_ANSWERED,
   START_NEW_ROUND,
+  ROUND_OVER
 } from '../actions/socketActions';
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   currentDrawer: '',
   guesses: [],
   winner: {},
+  isIntermission: false
 };
 
 export default function reducer(state = initialState, action) {
@@ -30,7 +32,7 @@ export default function reducer(state = initialState, action) {
     case WRONG_ANSWER:
       return { ...state, guesses: [...state.guesses, action.payload] };
     case CORRECTLY_ANSWERED:
-      return { ...state, winner: action.payload };
+      return { ...state, winner: action.payload, isIntermission: true };
     case START_NEW_ROUND:
       return {
         ...state,
@@ -40,8 +42,11 @@ export default function reducer(state = initialState, action) {
         roundNumber: action.payload.round.roundNumber,
         currentDrawer: action.payload.drawer.nickname,
         guesses: [],
-        winner: {}
+        winner: {},
+        isIntermission: false
       };
+    case ROUND_OVER:
+      return { ...state, isIntermission: true };
     default:
       return state;
   }
