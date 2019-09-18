@@ -85,6 +85,7 @@
                 0px 0px 3px 3px LightGrey; 
         padding: 15px;
         background: PaleTurquoise;
+        margin-top: 3vw;
         margin: 0 0 10px 0;
         color: pink;
        
@@ -97,6 +98,7 @@
 
         transition: .4s ease-out;
         outline-width: 0;
+        text-align: center;
           
     }
 
@@ -105,8 +107,9 @@
         transition: transform .4s;
     }
 
+
     button {
-        margin: 3vw;
+        margin: 2vw;
         background-color: PaleTurquoise;
         color:pink;
         border: 5px solid LightPink; 

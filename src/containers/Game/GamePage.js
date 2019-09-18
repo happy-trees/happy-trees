@@ -140,27 +140,31 @@ class GamePage extends React.Component {
       <>
       <div className={styles.FullGame}>
         <h1>Happy Trees</h1>
-        <StatusBar nickname={nickname} time={time} />
-        <div className={styles.Word}>
-          <h3>W o r d</h3>
-        </div>
-        <div id="game-container" className={styles.GameContainer}>
-          <P5Wrapper 
-            sketch={sketch} 
-            color={'#000000'} 
-            canvasWidth={canvasWidth} 
-            canvasHeight={canvasHeight}
-            emitStroke={this.emitStroke}
-            strokes={strokes}
-            isDrawing={isDrawing}
+        <div className={styles.FullBorder}>
+          <StatusBar nickname={nickname} time={time} />
+          <div className={styles.Word}>
+            <h3>W o r d</h3>
+          </div>
+          <div className={styles.GameBorder}>
+            <div id="game-container" className={styles.GameContainer}>
+              <P5Wrapper 
+                sketch={sketch} 
+                color={'#000000'} 
+                canvasWidth={canvasWidth} 
+                canvasHeight={canvasHeight}
+                emitStroke={this.emitStroke}
+                strokes={strokes}
+                isDrawing={isDrawing}
+              />
+            </div>
+          </div>
+          <GameInput 
+            guesses={3}
+            guess={guess}
+            handleSubmit={this.emitAnswer}
+            handleChange={this.handleChange}
           />
         </div>
-        {isPlaying && !isDrawing && <GameInput 
-          guesses={3}
-          guess={guess}
-          handleSubmit={this.emitAnswer}
-          handleChange={this.handleChange}
-        />}
       </div>
       </>
     );

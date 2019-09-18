@@ -2,16 +2,19 @@
 .StatusBar {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  width: 33vw;
-  height: 4vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70vw;
+  height: 5vh;
   font-family: 'Gloria Hallelujah', cursive;
   text-shadow: 2px 2px 0px  #fff,
    -2px -2px 0px  #fff,
    1px -1px 0px  #fff,
    -2px 1px #fff;
-  font-size: .8em;
-  border-radius: 12px;
+  font-size: 1em;
+  border: 5px solid LightPink; 
+  border-radius: 10px;
 }
 .roundTime {
   display: flex;

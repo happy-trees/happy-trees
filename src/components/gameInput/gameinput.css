@@ -1,24 +1,46 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+
+.InputContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .guess {
   font-size: 1em;
   white-space: nowrap;
+  text-shadow: 2px 2px 0px  #fff,
+   -2px -2px 0px  #fff,
+   1px -1px 0px  #fff,
+   -2px 1px #fff;
 }
+
 .form {
   display: flex;
-  margin: 0 15px 0 15px;
   justify-content: center;
-  padding: 3px;
-  background: linear-gradient(21deg, #10abff, #1beabd);
-  border-radius: 30px;
-  height: 100%;
 }
 
 .input {
-  width: 100%;
-  border: white;
-  border-radius: 12px;
-  padding: 0 .325em;
-  color: purple;
+  border: 5px solid LightPink; 
+  border-radius: 10px;
+
+  -webkit-box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+    0 0 16px rgba(0,0,0,0.1),
+    0px 0px 3px 3px LightGrey;  
+  -moz-box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+    0 0 16px rgba(0,0,0,0.1), 
+    0px 0px 3px 3px LightGrey; 
+  box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+    0 0 16px rgba(0,0,0,0.1), 
+    0px 0px 3px 3px LightGrey; 
+
+    color: pink;
+    text-align: center;
+  
 }
 
 .input:focus {
@@ -29,5 +51,25 @@ section {
   font-family: 'Gloria Hallelujah', cursive;
 }
 .button {
-  border-radius: 12px;
+  margin: .5vw;
+        
+        color:pink;
+        background-color: white;
+        border: 5px solid LightPink; 
+        border-radius: 10px;
+        -webkit-box-shadow: 
+        inset 0 0 8px  rgba(0,0,0,0.1),
+              0 0 16px rgba(0,0,0,0.1),
+              0px 0px 3px 3px LightGrey;  
+      -moz-box-shadow: 
+        inset 0 0 8px  rgba(0,0,0,0.1),
+              0 0 16px rgba(0,0,0,0.1), 
+              0px 0px 3px 3px LightGrey; 
+      box-shadow: 
+        inset 0 0 8px  rgba(0,0,0,0.1),
+              0 0 16px rgba(0,0,0,0.1), 
+              0px 0px 3px 3px LightGrey; 
+
+              transition: .4s ease-out;
+              outline-width: 0;
 }
