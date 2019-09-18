@@ -57,9 +57,8 @@
         width: 300px;
         height: 300px;
         border: solid .3em LightPink;
-        border-radius: 12px;
+        border-radius: 10px;
         margin: 1vw;
-        opacity: 1.0;
     }
 
     .GameContainer {
@@ -70,6 +69,7 @@
         height: 300px;
         background-color: white;
         opacity: 1.0;
+        border-radius: 10px;
       }
 
     .GameInput {

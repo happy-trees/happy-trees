@@ -10,7 +10,7 @@ import Game from '../containers/Game/GamePage';
 import Landing from '../containers/LandingContainer/LandingContainer';
 import { WithSession } from './WithSession';
 // import FullGame from '../containers/Game/FullGame';
-import GamePage from '../containers/Game/GamePage';
+
 
 import './app.css';
 import 'normalize.css';
@@ -18,7 +18,11 @@ import 'normalize.css';
 export default function App() {
   return (
     <Router>
-      <GamePage />
+      <Switch>
+        <Route path="/game" component={WithSession(Game)}/>
+        <Route path="/landing" component={Landing}/>
+        <Route path="/" component={WithSession(Home)}/>
+      </Switch>
     </Router>
   );
 }

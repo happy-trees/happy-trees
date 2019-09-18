@@ -158,12 +158,12 @@ class GamePage extends React.Component {
               />
             </div>
           </div>
-          <GameInput 
+          {isPlaying && !isDrawing && <GameInput 
             guesses={3}
             guess={guess}
             handleSubmit={this.emitAnswer}
             handleChange={this.handleChange}
-          />
+          />}
         </div>
       </div>
       </>
