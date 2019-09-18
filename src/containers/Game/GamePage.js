@@ -166,7 +166,7 @@ class GamePage extends React.Component {
           handleSubmit={this.emitAnswer}
           handleChange={this.handleChange}
         />}
-        { time === 0 && <ModalStats roundWinner={roundWinner} nickname={nickname} countdown={countdown} guesses={guesses} /> }
+        <ModalStats roundWinner={roundWinner} nickname={nickname} countdown={countdown} guesses={guesses} />
         
       </div>
       </>
