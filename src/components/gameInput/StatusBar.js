@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import styles from './statusbar.css';
 
 
-function StatusBar({ handleChange, time, currentDrawer, roundNumber }) {
+function StatusBar({ handleChange, time, currentDrawer, roundNumber, color  }) {
   return (
     <>
     <div className={styles.StatusBar}>
-      <div className={styles.round}>Round<div className={styles.roundColor}>{roundNumber}</div></div>
-      <div className={styles.timerContainer}>timer<div className={styles.timeColor}>{time}</div></div>
-      <div className={styles.currentArtist}>Drawer<div className={styles.drawerColor}>{currentDrawer}</div></div>
+      <div className={styles.round}>Round: {roundNumber}</div>
+      <div className={styles.timerContainer}>timer: {time}</div>
+      <div className={styles.currentArtist}>Drawer: {currentDrawer}</div>
       <div className={styles.colorPicker}>
-        {/* <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
-        <input className={styles.brushBar} type="color" id="brush" name="brush" value="#FF914D" onChange={handleChange}/> */}
+        <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
+        <input className={styles.brushBar} type="color" id="brush" name="brush" value={color} onChange={handleChange}/>
       </div>
     </div>
     </>
@@ -24,6 +24,7 @@ StatusBar.propTypes = {
   handleChange: PropTypes.func,
   time: PropTypes.number,
   roundNumber: PropTypes.number,
+  color: PropTypes.string.isRequired
 };
 
 export default React.memo(StatusBar);

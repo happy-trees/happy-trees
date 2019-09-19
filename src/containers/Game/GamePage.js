@@ -158,7 +158,7 @@ class GamePage extends React.Component {
     return (
       <>
       <div className={styles.FullGame}>
-        <h1>Happy Trees</h1>
+
 
         <div className={styles.FullBorder}>
           <StatusBar nickname={nickname} 

@@ -64,9 +64,9 @@
 
 
     .Avatar {
-        height: 150px;
-        width: 150px;
-        margin: 5vw;
+        height: 30vh;
+        width: auto;
+        margin: 3vw;
     }
 }
 
@@ -75,7 +75,6 @@ h1 {
     text-shadow: 3px 3px 4px DimGray;
     margin-bottom: 3vw;
 }
-
 
 
 

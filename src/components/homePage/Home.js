@@ -4,7 +4,6 @@ import PlayButton from './PlayButton';
 import styles from './Home.css';
 import BobPositive from '../../assets/BobPositive.png';
 
-
 function Home({ nickname }) {
   return (
     <div className={styles.Home}>
@@ -16,7 +15,8 @@ function Home({ nickname }) {
 }
 
 Home.propTypes = {
-  nickname: PropTypes.string
+  nickname: PropTypes.string,
+  avatar: PropTypes.string
 };
 
 export default Home;
