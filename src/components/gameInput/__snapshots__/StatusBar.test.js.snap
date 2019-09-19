@@ -43,7 +43,6 @@ exports[`StatusBar renders Status Bar component 1`] = `
         id="color"
         name="color"
         type="color"
-        value="#000000"
       />
     </div>
   </div>
