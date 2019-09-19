@@ -28,7 +28,6 @@ const mapStateToProps = (state) => ({
   scores: getScores(state)
 });
 
-
 export default connect(
   mapStateToProps,
   null

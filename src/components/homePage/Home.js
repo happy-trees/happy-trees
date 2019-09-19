@@ -4,7 +4,6 @@ import PlayButton from './PlayButton';
 import styles from './Home.css';
 import BobPositive from '../../assets/BobPositive.png';
 
-
 function Home({ nickname }) {
   return (
     <div className={styles.Home}>
