@@ -194,13 +194,13 @@ class GamePage extends React.Component {
               handleChange={this.handleChange}
             />}
 
-            {/* { isIntermission && <ModalStats
+            { isIntermission && <ModalStats
               roundWinner={roundWinner}
               nickname={nickname} 
               countdown={countdown}
               guesses={guesses} 
               isPlaying={isPlaying}
-            /> } */}
+            /> }
         
           </div>
         </div>
