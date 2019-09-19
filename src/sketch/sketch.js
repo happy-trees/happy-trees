@@ -3,9 +3,15 @@ export default function sketch(p){
   let props = {};
 
   p.setup = () => {
-    // const gameContainerElement = document.getElementById('game-container');
-    // const measurements = gameContainerElement.getBoundingClientRect();
-    canvas = p.createCanvas(300, 300);
+    if(props.canvasHeight && props.canvasWidth) {
+      canvas = p.createCanvas(props.canvasWidth, props.canvasHeight);
+    } else {
+      console.log('SOME STRANGE STUFF IS HAPPENING');
+      setTimeout(() => {
+        p.setup();
+      }, 100);
+    }
+    
     p.strokeWeight(2);
   };
 
@@ -17,10 +23,10 @@ export default function sketch(p){
   
       if(props.emitStroke) {
         const data = {
-          x: p.mouseX,
-          y: p.mouseY,
-          px: p.pmouseX,
-          py: p.pmouseY,
+          x: p.mouseX / props.canvasWidth,
+          y: p.mouseY / props.canvasHeight,
+          px: p.pmouseX / props.canvasWidth,
+          py: p.pmouseY / props.canvasHeight,
           color: '#000000',
           strokeWidth: 5
         };
@@ -34,7 +40,8 @@ export default function sketch(p){
       props.strokes.forEach(stroke => {
         p.stroke(stroke.color);
         p.strokeWeight(stroke.strokeWidth);
-        p.line(stroke.x, stroke.y, stroke.px, stroke.py);
+        p.line(stroke.x * props.canvasWidth, stroke.y * props.canvasHeight,
+          stroke.px * props.canvasWidth, stroke.py * props.canvasHeight);
       });
     }
   };
