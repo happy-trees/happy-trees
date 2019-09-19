@@ -12,5 +12,3 @@ export const guestSignUp = (nickname, avatar) => {
       return res.json();
     });
 };
-
-
