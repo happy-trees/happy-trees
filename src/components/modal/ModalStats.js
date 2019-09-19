@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styles from './modal.css';
 
 function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
@@ -35,18 +36,20 @@ function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
             <ul> 
               {allGuesses}
             </ul>
-            <p>Get Ready, next round in: {countdown}</p>
+            {isPlaying && <p>Get Ready, next round in: {countdown}</p> }
 
           </Modal.Body>
 
           {!isPlaying && <Modal.Footer>
-            <Button 
-              className={styles.modalButton} 
-              variant="secondary" 
-              onClick={handleClose}
-            >
-                Close 
-            </Button>
+            <Link to="/results">
+              <Button 
+                className={styles.modalButton} 
+                variant="secondary" 
+                onClick={handleClose}
+              >
+                Results 
+              </Button>
+            </Link>
           </Modal.Footer>}
         </div>
       </Modal>
