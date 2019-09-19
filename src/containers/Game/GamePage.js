@@ -60,8 +60,6 @@ class GamePage extends React.Component {
 
   componentDidMount() {
     const gameContainer = document.querySelector('#game-container');
-    console.log('width', gameContainer.offsetWidth);
-    console.log('height', gameContainer.offsetHeight);
     if(gameContainer && gameContainer.offsetWidth && gameContainer.offsetWidth) {
       this.setState({ 
         canvasWidth:  gameContainer.offsetWidth, 

@@ -5,14 +5,12 @@ export default function sketch(p){
   p.setup = () => {
     if(props.canvasHeight && props.canvasWidth) {
       canvas = p.createCanvas(props.canvasWidth, props.canvasHeight);
+      p.strokeWeight(2);
     } else {
-      console.log('SOME STRANGE STUFF IS HAPPENING');
       setTimeout(() => {
         p.setup();
       }, 100);
     }
-    
-    p.strokeWeight(2);
   };
 
   p.mouseDragged = () => {
