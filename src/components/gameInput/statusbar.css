@@ -2,16 +2,20 @@
 .StatusBar {
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-between;
-  width: 33vw;
-  height: 4vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 70vw;
+  height: 5vh;
   font-family: 'Gloria Hallelujah', cursive;
   text-shadow: 2px 2px 0px  #fff,
    -2px -2px 0px  #fff,
    1px -1px 0px  #fff,
    -2px 1px #fff;
-  font-size: .8em;
-  border-radius: 12px;
+  font-size: 1em;
+  border: 5px solid LightPink; 
+  border-radius: 10px;
+  padding: 3px;
 }
 .roundTime {
   display: flex;
@@ -22,28 +26,10 @@
 .round {
   flex-wrap: wrap;
   margin: auto;
-  .roundColor {
-    flex-wrap: wrap;
-    margin: auto;
-    flex-direction: row;
-    color: #3866FF;
-    font-weight: bold;
-    font-size: 1.5em;
-  }
 }
 .timerContainer {
   flex-wrap: wrap;
   margin: auto;
-  flex-direction: row;
-  justify-content: space-between;
-  .timeColor {
-    flex-wrap: wrap;
-    margin: auto;
-    flex-direction: row;
-    color: purple;
-    font-weight: bold;
-    font-size: 1.5em;
-  }
 }
 .artistAndColor {
   display: flex;
@@ -53,14 +39,6 @@
 .currentArtist {
   flex-wrap: wrap;
   margin: auto;
-  .drawerColor {
-    flex-wrap: wrap;
-    margin: auto;
-    flex-direction: row;
-    color: #FF66C4;
-    font-weight: bold;
-    font-size: 1.5em;
-  }
 }
 .colorPicker {
   flex-wrap: wrap;
@@ -81,3 +59,11 @@
   border-width: 0px;
 }
 
+
+@media screen and (max-width: 320px) and (max-height: 568px) {
+
+  .StatusBar {
+    font-size: .5em;
+    height: 5vh;
+  }
+}

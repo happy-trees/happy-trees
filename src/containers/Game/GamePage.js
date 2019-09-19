@@ -157,51 +157,54 @@ class GamePage extends React.Component {
     
     return (
       <>
-      <div className={styles.FullGame}>
-        <h1>Happy Trees</h1>
+        <div className={styles.FullGame}>
 
-        <StatusBar 
-          nickname={nickname}
-          roundNumber={roundNumber}
-          time={time} 
-          currentDrawer={currentDrawer} 
-          handleChange={this.handleChange}
-          color={color}
-        />
+          <div className={styles.fullBorder}>
+            <StatusBar 
+              nickname={nickname}
+              roundNumber={roundNumber}
+              time={time} 
+              currentDrawer={currentDrawer} 
+              handleChange={this.handleChange}
+              color={color}
+            />
 
-        <div className={styles.Word}>
-          <h3>W o r d</h3>
-        </div>
+            <div className={styles.Word}>
+              <h3>W o r d</h3>
+            </div>
+            <div className={styles.gameBorder}>
+              <div id="game-container" className={styles.GameContainer}>
+                <P5Wrapper 
+                  sketch={sketch} 
+                  color={color} 
+                  canvasWidth={canvasWidth} 
+                  canvasHeight={canvasHeight}
+                  emitStroke={this.emitStroke}
+                  strokes={strokes}
+                  isDrawing={isDrawing}
+                  isIntermission={isIntermission}
+                />
+              </div>
+            </div>
 
-        <div id="game-container" className={styles.GameContainer}>
-          <P5Wrapper 
-            sketch={sketch} 
-            color={color} 
-            canvasWidth={canvasWidth} 
-            canvasHeight={canvasHeight}
-            emitStroke={this.emitStroke}
-            strokes={strokes}
-            isDrawing={isDrawing}
-            isIntermission={isIntermission}
-          />
-        </div>
+            {isPlaying && !isDrawing && <GameInput 
+              guesses={guessesLeft}
+              guess={guess}
+              handleSubmit={this.emitAnswer}
+              handleChange={this.handleChange}
+            />}
 
-        {isPlaying && !isDrawing && <GameInput 
-          guesses={guessesLeft}
-          guess={guess}
-          handleSubmit={this.emitAnswer}
-          handleChange={this.handleChange}
-        />}
-
-        { isIntermission && <ModalStats
-          roundWinner={roundWinner}
-          nickname={nickname} 
-          countdown={countdown}
-          guesses={guesses} 
-          isPlaying={isPlaying}
-        /> }
+            { isIntermission && <ModalStats
+              roundWinner={roundWinner}
+              nickname={nickname} 
+              countdown={countdown}
+              guesses={guesses} 
+              isPlaying={isPlaying}
+            /> }
         
-      </div>
+          </div>
+        </div>
+      
       </>
     );
     
