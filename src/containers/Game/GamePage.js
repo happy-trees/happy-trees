@@ -161,8 +161,6 @@ class GamePage extends React.Component {
     const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer,
       roundWinner, roundNumber, isIntermission, guessesLeft, word,
     } = this.props;
-
-    
     
     return (
       <>
@@ -186,16 +184,19 @@ class GamePage extends React.Component {
             </div>
             <div className={styles.gameBorder}>
               <div id="game-container" className={styles.GameContainer}>
-                <P5Wrapper 
-                  sketch={sketch} 
-                  color={color} 
-                  canvasWidth={canvasWidth} 
-                  canvasHeight={canvasHeight}
-                  emitStroke={this.emitStroke}
-                  strokes={strokes}
-                  isDrawing={isDrawing}
-                  isIntermission={isIntermission}
-                />
+                {isPlaying 
+                  ? <P5Wrapper 
+                    sketch={sketch} 
+                    color={color} 
+                    canvasWidth={canvasWidth} 
+                    canvasHeight={canvasHeight}
+                    emitStroke={this.emitStroke}
+                    strokes={strokes}
+                    isDrawing={isDrawing}
+                    isIntermission={isIntermission}
+                  /> 
+                  : <h3 className={styles.waiting}>WAITING FOR PLAYERS</h3>
+                }
               </div>
             </div>
 
