@@ -14,7 +14,7 @@ import { receiveStroke } from '../../actions/drawingActions';
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
 import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses,
-  getRoundNumber, getCurrentDrawer, getCorrectWinner, getIsIntermission, getGuessesLeft,
+  getRoundNumber, getCurrentDrawer, getCorrectWinner, getIsIntermission, getGuessesLeft, getWord,
 } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
@@ -43,7 +43,8 @@ class GamePage extends React.Component {
     isIntermission: PropTypes.bool,
     roundOver: PropTypes.func,
     gameOver: PropTypes.func.isRequired,
-    guessesLeft: PropTypes.number.isRequired
+    guessesLeft: PropTypes.number.isRequired,
+    word: PropTypes.string.isRequired,
   }
 
   state = {
@@ -148,12 +149,20 @@ class GamePage extends React.Component {
     this.setState({ guess: '' });
     
   }
+
+  wordBlanks = () => {
+    return this.props.word.split('').map((l, i) => {
+      return <span key={i}>_ </span>;
+    });
+  }
   
   render() {
     const { canvasWidth, canvasHeight, time, guess, countdown, color } = this.state;
     const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer,
-      roundWinner, roundNumber, isIntermission, guessesLeft,
+      roundWinner, roundNumber, isIntermission, guessesLeft, word,
     } = this.props;
+
+    
     
     return (
       <>
@@ -170,7 +179,10 @@ class GamePage extends React.Component {
             />
 
             <div className={styles.Word}>
-              <h3>W o r d</h3>
+
+              {isDrawing && <h3>Draw: {word}</h3>}
+              {!isDrawing && <h3>{this.wordBlanks()}</h3>} 
+
             </div>
             <div className={styles.gameBorder}>
               <div id="game-container" className={styles.GameContainer}>
@@ -224,7 +236,8 @@ const mapStateToProps = (state) => ({
   currentDrawer: getCurrentDrawer(state),
   roundWinner: getCorrectWinner(state),
   isIntermission: getIsIntermission(state),
-  guessesLeft: getGuessesLeft(state)
+  guessesLeft: getGuessesLeft(state),
+  word: getWord(state),
 });
 const mapDispatchToProps = dispatch => ({
   startListening: () => dispatch(beginListening()),

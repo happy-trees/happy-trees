@@ -20,7 +20,8 @@ const initialState = {
   guesses: [],
   winner: null,
   isIntermission: false,
-  guessesLeft: 3
+  guessesLeft: 3,
+  word: ''
 };
 
 export default function reducer(state = initialState, action) {
@@ -52,12 +53,13 @@ export default function reducer(state = initialState, action) {
         guesses: [],
         winner: null,
         isIntermission: false,
-        guessesLeft: 3
+        guessesLeft: 3,
+        word: action.payload.round.word
       };
     case ROUND_OVER:
       return { ...state, isIntermission: true };
     case GAME_OVER:
-      return { ...state, isPlaying: false };
+      return { ...state, isPlaying: false, word: '' };
     default:
       return state;
   }
