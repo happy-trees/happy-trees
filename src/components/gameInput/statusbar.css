@@ -6,16 +6,31 @@
   align-items: center;
   text-align: center;
   width: 70vw;
-  height: 5vh;
+  height: 10vh;
+  margin-bottom: 1vw;
   font-family: 'Gloria Hallelujah', cursive;
   text-shadow: 2px 2px 0px  #fff,
    -2px -2px 0px  #fff,
    1px -1px 0px  #fff,
    -2px 1px #fff;
   font-size: 1em;
-  border: 5px solid LightPink; 
+  border: 5px solid #7ed957; 
   border-radius: 10px;
   padding: 3px;
+  background-color: #ffffff;
+
+  -webkit-box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+        0 0 16px rgba(0,0,0,0.1),
+        0px 0px 3px 3px LightGrey;  
+-moz-box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+        0 0 16px rgba(0,0,0,0.1), 
+        0px 0px 3px 3px LightGrey; 
+box-shadow: 
+  inset 0 0 8px  rgba(0,0,0,0.1),
+        0 0 16px rgba(0,0,0,0.1), 
+        0px 0px 3px 3px LightGrey; 
 }
 .roundTime {
   display: flex;
@@ -41,6 +56,8 @@
   margin: auto;
 }
 .colorPicker {
+  display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin: auto;
   justify-content: center space-evenly;
@@ -49,13 +66,13 @@
   display: inline-flex;
   flex-wrap: wrap;
   margin: auto;
-  padding: 1vw;
+  
 }
 .brushBar {
   flex-wrap: wrap;
   margin: auto;
   width: 4vw;
-  height: 4vh;
+  height: 3vh;
   border-width: 0px;
 }
 
@@ -66,4 +83,15 @@
     font-size: .5em;
     height: 5vh;
   }
+}
+
+@media screen and (max-width: 450px) {
+ .StatusBar {
+  height: 20vh;
+  width: 90vw;
+ }
+
+ .brushBar {
+   width: 8vw;
+ }
 }
