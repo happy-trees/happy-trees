@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import sketch from '../../sketch/sketch';
 import { beginListening, endListening, joinedGame, startNewRound, wrongAnswer,
-  correctylyAnswered, roundOver } from '../../actions/socketActions';
+  correctylyAnswered, roundOver, gameOver } from '../../actions/socketActions';
 import { getStrokes } from '../../selectors/drawingSelectors';
 import { getUserNickname } from '../../selectors/authSelectors';
 import { receiveStroke } from '../../actions/drawingActions';
@@ -42,6 +42,7 @@ class GamePage extends React.Component {
     roundWinner: PropTypes.object,
     isIntermission: PropTypes.bool,
     roundOver: PropTypes.func,
+    gameOver: PropTypes.func.isRequired,
     guessesLeft: PropTypes.number.isRequired
   }
 
@@ -50,7 +51,8 @@ class GamePage extends React.Component {
     canvasHeight: null,
     time: null,
     guess: '',
-    countdown: null
+    countdown: null,
+    color: '#000000'
   }
 
   socket = io('http://localhost:3000');
@@ -110,11 +112,8 @@ class GamePage extends React.Component {
       console.log('round over');
     });
 
-    this.socket.on('game over', () => {
-      console.log('game over');
-    });
-
     this.socket.on('game scores', ({ scores }) => {
+      this.props.gameOver(scores);
       console.log('game scores', scores);
     });
   }
@@ -131,6 +130,7 @@ class GamePage extends React.Component {
 
   emitStroke = (data) => {
     const { gameId } = this.props;
+    data.color = this.state.color;
     this.props.receiveStroke(data);
     this.socket.emit('stroke', { data, gameId });
   }
@@ -150,55 +150,61 @@ class GamePage extends React.Component {
   }
   
   render() {
-    const { canvasWidth, canvasHeight, time, guess, countdown } = this.state;
+    const { canvasWidth, canvasHeight, time, guess, countdown, color } = this.state;
     const { isDrawing, nickname, strokes, isPlaying, guesses, currentDrawer,
       roundWinner, roundNumber, isIntermission, guessesLeft,
     } = this.props;
     
     return (
       <>
-      <div className={styles.FullGame}>
+        <div className={styles.FullGame}>
 
+          <div className={styles.fullBorder}>
+            <StatusBar 
+              nickname={nickname}
+              roundNumber={roundNumber}
+              time={time} 
+              currentDrawer={currentDrawer} 
+              handleChange={this.handleChange}
+              color={color}
+            />
 
-        <div className={styles.FullBorder}>
-          <StatusBar nickname={nickname} 
-            roundNumber={roundNumber}
-            time={time}
-            currentDrawer={currentDrawer} />
-
-          <div className={styles.Word}>
-            <h3>W o r d</h3>
-          </div>
-
-          <div className={styles.GameBorder}>
-            <div id="game-container" className={styles.GameContainer}>
-              <P5Wrapper 
-                sketch={sketch} 
-                color={'#000000'} 
-                canvasWidth={canvasWidth} 
-                canvasHeight={canvasHeight}
-                emitStroke={this.emitStroke}
-                strokes={strokes}
-                isDrawing={isDrawing}
-              />
+            <div className={styles.Word}>
+              <h3>W o r d</h3>
             </div>
-          </div>
-        
-          {isPlaying && !isDrawing && <GameInput 
-            guesses={guessesLeft}
-            guess={guess}
-            handleSubmit={this.emitAnswer}
-            handleChange={this.handleChange}
-          />}
+            <div className={styles.gameBorder}>
+              <div id="game-container" className={styles.GameContainer}>
+                <P5Wrapper 
+                  sketch={sketch} 
+                  color={color} 
+                  canvasWidth={canvasWidth} 
+                  canvasHeight={canvasHeight}
+                  emitStroke={this.emitStroke}
+                  strokes={strokes}
+                  isDrawing={isDrawing}
+                  isIntermission={isIntermission}
+                />
+              </div>
+            </div>
 
-          { isIntermission && <ModalStats
-            roundWinner={roundWinner}
-            nickname={nickname} 
-            countdown={countdown}
-            guesses={guesses} /> }
+            {isPlaying && !isDrawing && <GameInput 
+              guesses={guessesLeft}
+              guess={guess}
+              handleSubmit={this.emitAnswer}
+              handleChange={this.handleChange}
+            />}
+
+            { isIntermission && <ModalStats
+              roundWinner={roundWinner}
+              nickname={nickname} 
+              countdown={countdown}
+              guesses={guesses} 
+              isPlaying={isPlaying}
+            /> }
         
+          </div>
         </div>
-      </div>
+      
       </>
     );
     
@@ -229,6 +235,7 @@ const mapDispatchToProps = dispatch => ({
   correctlyAnswered: (answer, nickname) => dispatch(correctylyAnswered(answer, nickname)),
   startNewRound: (round, userId, drawer) => dispatch(startNewRound(round, userId, drawer)),
   roundOver: () => dispatch(roundOver()),
+  gameOver: (scores) => dispatch(gameOver(scores))
 });
 
 export default connect(

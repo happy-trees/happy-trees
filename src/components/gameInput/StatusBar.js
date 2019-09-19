@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styles from './statusbar.css';
 
 
-function StatusBar({ handleChange, time, currentDrawer, roundNumber, color  }) {
+function StatusBar({ handleChange, time, currentDrawer, roundNumber, color }) {
   return (
     <>
     <div className={styles.StatusBar}>
@@ -11,8 +11,8 @@ function StatusBar({ handleChange, time, currentDrawer, roundNumber, color  }) {
       <div className={styles.timerContainer}>timer: {time}</div>
       <div className={styles.currentArtist}>Drawer: {currentDrawer}</div>
       <div className={styles.colorPicker}>
-        <label className={styles.brushTitle}htmlFor="brush">Brush Color</label>
-        <input className={styles.brushBar} type="color" id="brush" name="brush" value={color} onChange={handleChange}/>
+        <label className={styles.brushTitle}htmlFor="color">Brush Color</label>
+        <input className={styles.brushBar} type="color" id="color" name="color" value={color} onChange={handleChange}/>
       </div>
     </div>
     </>
