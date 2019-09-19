@@ -10,3 +10,4 @@ export const getCurrentDrawer = state => getSocketState(state).currentDrawer;
 export const getIsIntermission = state => getSocketState(state).isIntermission;
 export const getGuessesLeft = state => getSocketState(state).guessesLeft;
 export const getWord = state => getSocketState(state).word;
+export const getScores = state => getSocketState(state).scores;

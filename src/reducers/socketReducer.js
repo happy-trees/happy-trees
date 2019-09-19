@@ -6,7 +6,8 @@ import {
   CORRECTLY_ANSWERED,
   START_NEW_ROUND,
   ROUND_OVER,
-  GAME_OVER
+  GAME_OVER,
+  CLEAR_GAME_STATE
 } from '../actions/socketActions';
 
 const initialState = {
@@ -21,7 +22,8 @@ const initialState = {
   winner: null,
   isIntermission: false,
   guessesLeft: 3,
-  word: ''
+  word: '',
+  scores: []
 };
 
 export default function reducer(state = initialState, action) {
@@ -59,7 +61,22 @@ export default function reducer(state = initialState, action) {
     case ROUND_OVER:
       return { ...state, isIntermission: true };
     case GAME_OVER:
-      return { ...state, isPlaying: false, word: '' };
+      return { ...state, scores: action.payload, isPlaying: false, word: '' };
+    case CLEAR_GAME_STATE:
+      return {
+        ...state,
+        isPlaying: false,
+        isDrawing: false,
+        isIntermission: false,
+        currentDrawer: null,
+        gameId: null,
+        roundNumber: null,
+        roundId: null,
+        guesses: [],
+        winner: null,
+        guessesLeft: 3,
+        scores: []
+      };
     default:
       return state;
   }
