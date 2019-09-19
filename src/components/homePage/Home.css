@@ -7,7 +7,7 @@
     justify-content: center;
     margin: 10vw;
     opacity: 0.9;
-    border: 5px solid LightPink; 
+    border: 5px solid #38b6ff; 
         
     -webkit-box-shadow: 
       inset 0 0 8px  rgba(0,0,0,0.1),
@@ -22,13 +22,12 @@
             0 0 16px rgba(0,0,0,0.1), 
             0px 0px 3px 3px LightGrey; 
     padding: 15px;
-    background: Aquamarine;
     margin: 0 0 10px 0;
-    color: pink;
+    color: #ff66c4;
     border-radius: 10px;
 
     h1 {
-        color: pink;
+        color: #ff66c4;
         text-shadow: 3px 3px 4px DimGray;
         margin-bottom: 3vw;
         font-size: 3em; 
@@ -37,8 +36,8 @@
     button {
         margin: 2vw;
         background-color: PaleTurquoise;
-        color:pink;
-        border: 5px solid LightPink; 
+        color:#7ed957;
+        border: 5px solid #7ed957; 
         border-radius: 10px;
         -webkit-box-shadow: 
         inset 0 0 8px  rgba(0,0,0,0.1),
@@ -61,6 +60,10 @@
         transform: scale(1.5);
     transition: transform .4s;
     }
+
+    button:focus {
+        outline-width: 0;
+      }
 
 
     .Avatar {

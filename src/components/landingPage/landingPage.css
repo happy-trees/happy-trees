@@ -9,23 +9,24 @@
 
 .Logo{
   
-  color: LightPink;
-  text-shadow: 6px 6px 6px Aquamarine;
-  font-size: 3em;
+  color: #7ed957;
+  text-shadow: 6px 6px 6px #ff66c4;
+  font-size: 4em;
 }
 
 
 .LandingPage {
-  height: 80vh;
+  height: 50vh;
   width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin: 10vw;
   opacity: 0.9;
   
 
-  border: 5px solid LightPink; 
+  border: 5px solid #cb6ce6; 
       
   -webkit-box-shadow: 
     inset 0 0 8px  rgba(0,0,0,0.1),
@@ -40,14 +41,13 @@
           0 0 16px rgba(0,0,0,0.1), 
           0px 0px 3px 3px LightGrey; 
   padding: 15px;
-  background: Aquamarine;
-  margin: 0 0 10px 0;
+  
   color: pink;
   border-radius: 10px;
   
 
   h1 {
-      color: pink;
+      color: #5ce1e6;
       text-shadow: 3px 3px 4px DimGray;
       margin-bottom: 3vw;
       padding: 5px;
@@ -55,13 +55,13 @@
   }
 
   ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-      color: pink;
+      color: #ff66c4;
     }
     ::-moz-placeholder { /* Firefox 19+ */
-      color: pink;
+      color: #ff66c4;
     }
     :-ms-input-placeholder { /* IE 10+ */
-      color: pink;
+      color: #ff66c4;
     }
 
     form {
@@ -72,7 +72,7 @@
   
 
     input {
-      border: 5px solid LightPink; 
+      border: 5px solid #ff66c4; 
       
       -webkit-box-shadow: 
         inset 0 0 8px  rgba(0,0,0,0.1),
@@ -90,7 +90,7 @@
       background: PaleTurquoise;
       margin-top: 3vw;
       margin: 0 0 10px 0;
-      color: pink;
+      color: #ff66c4;
      
       border-radius: 10px;
       
@@ -108,8 +108,8 @@
   button {
       margin: 2vw;
       background-color: PaleTurquoise;
-      color:pink;
-      border: 5px solid LightPink; 
+      color:#7ed957;
+      border: 5px solid #7ed957; 
       border-radius: 10px;
       -webkit-box-shadow: 
       inset 0 0 8px  rgba(0,0,0,0.1),
@@ -132,5 +132,28 @@
       transform: scale(1.5);
   transition: transform .4s;
   }
+
+  button:focus {
+    outline-width: 0;
+  }
   
+}
+
+@media screen and (max-width: 450px) {
+  .Logo {
+    font-size: 3em;
+  }
+
+  .LandingPage {
+    h1 {
+    font-size: 1.5em;
+    color: #38b6ff;
+  }
+}
+}
+
+@media screen and (min-width: 600px) {
+  .LandingPage {
+    width: 60vw;
+  }
 }
