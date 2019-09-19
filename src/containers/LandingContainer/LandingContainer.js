@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LandingPage from '../../components/landingPage/LandingPage';
-import { loginUser } from '../../actions/authActions';
+import { loginUser, verifyUser } from '../../actions/authActions';
 import { getUserId, getUserError } from '../../selectors/authSelectors';
 
 class LandingContainer extends React.Component {
@@ -10,11 +10,16 @@ class LandingContainer extends React.Component {
     userId: PropTypes.string,
     error: PropTypes.string,
     handleSubmit: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    verifyUser: PropTypes.func.isRequired
   }
 
   state = {
     nickname: '',
+  }
+
+  componentDidMount() {
+    this.props.verifyUser();
   }
 
   componentDidUpdate(prevState, prevProps) {
@@ -52,7 +57,8 @@ const mapDispatchToProps = dispatch => ({
   handleSubmit(event, nickname) {
     event.preventDefault();
     dispatch(loginUser(nickname));
-  }
+  },
+  verifyUser: () => dispatch(verifyUser())
 });
 
 export default connect(
