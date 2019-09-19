@@ -5,8 +5,8 @@ const Score = ({ nickName, score }) => {
 
   return (
     <div>
-      <h3>{nickName}</h3>
-      <h3>{score}</h3>
+      <h3>Danny</h3>
+      <h3>3</h3>
     </div>
   );
 };
