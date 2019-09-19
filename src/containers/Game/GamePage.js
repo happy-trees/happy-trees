@@ -166,6 +166,7 @@ class GamePage extends React.Component {
           time={time} 
           currentDrawer={currentDrawer} 
           handleChange={this.handleChange}
+          color={color}
         />
 
         <div className={styles.Word}>
