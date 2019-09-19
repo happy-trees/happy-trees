@@ -63,9 +63,10 @@
   }
 }
 .colorPicker {
-  flex-wrap: wrap;
-  margin: auto;
-  justify-content: center space-evenly;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .brushTitle {
   display: inline-flex;
@@ -79,5 +80,10 @@
   width: 4vw;
   height: 4vh;
   border-width: 0px;
+  .brushStyle {
+    flex-wrap: wrap;
+    margin: auto;
+    flex-direction: row;
+  }
 }
 

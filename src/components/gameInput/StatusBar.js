@@ -12,7 +12,7 @@ function StatusBar({ handleChange, time, currentDrawer, roundNumber, color }) {
       <div className={styles.currentArtist}>Drawer<div className={styles.drawerColor}>{currentDrawer}</div></div>
       <div className={styles.colorPicker}>
         <label className={styles.brushTitle}htmlFor="color">Brush Color</label>
-        <input className={styles.brushBar} type="color" id="color" name="color" value={color} onChange={handleChange}/>
+        <div className={styles.brushStyle}><input className={styles.brushBar} type="color" id="color" name="color" value={color} onChange={handleChange}/></div>
       </div>
     </div>
     </>
