@@ -9,3 +9,4 @@ export const getRoundNumber = state => getSocketState(state).roundNumber;
 export const getCurrentDrawer = state => getSocketState(state).currentDrawer;
 export const getIsIntermission = state => getSocketState(state).isIntermission;
 export const getGuessesLeft = state => getSocketState(state).guessesLeft;
+export const getScores = state => getSocketState(state).scores;
