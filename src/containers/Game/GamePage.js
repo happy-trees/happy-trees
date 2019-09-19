@@ -55,7 +55,7 @@ class GamePage extends React.Component {
     color: '#000000'
   }
 
-  socket = io('https://happy-trees-api.herokuapp.com/');
+  socket = io('http://localhost:3000');
 
   componentDidMount() {
     const gameContainer = document.querySelector('#game-container');
