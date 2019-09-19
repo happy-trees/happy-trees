@@ -30,7 +30,7 @@ export default function sketch(p){
   };
 
   p.draw = () => {
-    if(props.strokes) {
+    if(props.strokes && !props.isIntermission) {
       props.strokes.forEach(stroke => {
         p.stroke(stroke.color);
         p.strokeWeight(stroke.strokeWidth);
