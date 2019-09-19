@@ -5,10 +5,10 @@ import {
   Route
 } from 'react-router-dom';
 
-// import Home from '../containers/Home/Home.js';
+import Home from '../containers/Home/Home.js';
 import Game from '../containers/Game/GamePage';
-// import Landing from '../containers/LandingContainer/LandingContainer';
-// import { WithSession } from './WithSession';
+import Landing from '../containers/LandingContainer/LandingContainer';
+import { WithSession } from './WithSession';
 // import FullGame from '../containers/Game/FullGame';
 
 
@@ -18,7 +18,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   return (
-    <Game />
+    <Router>
+      <Switch>
+        <Route path="/game" component={WithSession(Game)}/>
+        <Route path="/landing" component={Landing}/>
+        <Route path="/" component={WithSession(Home)}/>
+      </Switch>
+    </Router>
   );
 }
 
