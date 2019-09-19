@@ -62,4 +62,3 @@ ModalStats.propTypes = {
 };
 
 export default ModalStats;
-

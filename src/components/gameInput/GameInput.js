@@ -4,17 +4,18 @@ import styles from './gameinput.css';
 
 function GameInput({ guesses, guess, handleSubmit, handleChange  }) {
   return (
+    <div className={styles.InputContainer}>
+      <footer>
+        <section>
+          <p className={styles.guess}>You have {guesses} guesses left</p>
+        </section>
     
-    <footer>
-      <section>
-        <p className={styles.guess}>You have {guesses} guesses left</p>
-      </section>
-    
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <input className={styles.input} type="text" name="guess" value={guess} onChange={handleChange} />
-        <button className={styles.button}>+</button>
-      </form>
-    </footer>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input className={styles.input} type="text" name="guess" value={guess} onChange={handleChange} />
+          <button className={styles.button}>+</button>
+        </form>
+      </footer>
+    </div>
     
   );
 
