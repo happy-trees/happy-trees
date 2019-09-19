@@ -17,7 +17,7 @@
 
 .LandingPage {
   height: 50vh;
-  width: 60vh;
+  width: 80vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -150,4 +150,10 @@
     color: #38b6ff;
   }
 }
+}
+
+@media screen and (min-width: 600px) {
+  .LandingPage {
+    width: 60vw;
+  }
 }
