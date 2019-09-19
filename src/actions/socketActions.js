@@ -42,3 +42,8 @@ export const gameOver = (scores) => ({
   type: GAME_OVER,
   payload: scores
 });
+
+export const CLEAR_GAME_STATE = 'CLEAR_GAME_STATE';
+export const clearGameState = () => ({
+  type: CLEAR_GAME_STATE
+});
