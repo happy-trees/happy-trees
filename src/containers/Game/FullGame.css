@@ -16,7 +16,7 @@
         text-align: center;
         align-items: center;
         background: -webkit-linear-gradient( #10ABFF, #FF66C4);
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         font-size: 3em;
         }
