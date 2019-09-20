@@ -1,11 +1,17 @@
 export default function sketch(p){
-  let canvas;
   let props = {};
+  let canvas;
+
+  p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
+    props = newProps;
+
+    if(canvas && props.strokes)
+      p.resizeCanvas(newProps.canvasWidth, newProps.canvasHeight);
+  };
 
   p.setup = () => {
     if(props.canvasHeight && props.canvasWidth) {
       canvas = p.createCanvas(props.canvasWidth, props.canvasHeight);
-      p.strokeWeight(2);
     } else {
       setTimeout(() => {
         p.setup();
@@ -14,27 +20,21 @@ export default function sketch(p){
   };
 
   p.mouseDragged = () => {
-    if(props.isDrawing && !props.isIntermission) {
-      p.stroke(0, 0, 0);
-      p.strokeWeight(5);
-      p.line(p.mouseX, p.mouseY, p.pmouseX, p.pmouseY);
-  
-      if(props.emitStroke) {
-        const data = {
-          x: p.mouseX / props.canvasWidth,
-          y: p.mouseY / props.canvasHeight,
-          px: p.pmouseX / props.canvasWidth,
-          py: p.pmouseY / props.canvasHeight,
-          color: '#000000',
-          strokeWidth: 5
-        };
-        props.emitStroke(data);
-      }
+    if(props.isDrawing && !props.isIntermission && props.emitStroke) {
+      const data = {
+        x: p.mouseX / props.canvasWidth,
+        y: p.mouseY / props.canvasHeight,
+        px: p.pmouseX / props.canvasWidth,
+        py: p.pmouseY / props.canvasHeight,
+        color: props.color,
+        strokeWidth: 5
+      };
+      props.emitStroke(data);
     }
   };
 
   p.draw = () => {
-    if(props.strokes && !props.isIntermission) {
+    if(props.strokes) {
       props.strokes.forEach(stroke => {
         p.stroke(stroke.color);
         p.strokeWeight(stroke.strokeWidth);
@@ -42,12 +42,5 @@ export default function sketch(p){
           stroke.px * props.canvasWidth, stroke.py * props.canvasHeight);
       });
     }
-  };
-
-  p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
-    props = newProps;
-
-    if(canvas && newProps.canvasWidth && newProps.canvasHeight)
-      p.resizeCanvas(newProps.canvasWidth, newProps.canvasHeight);
   };
 }
