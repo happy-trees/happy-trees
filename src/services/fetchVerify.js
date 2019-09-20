@@ -1,5 +1,5 @@
 export const fetchVerify = () => {
-  return fetch('http://localhost:3000/api/v1/auth/verify', {
+  return fetch('https://happy-trees-api.herokuapp.com/api/v1/auth/verify', {
     mode: 'cors',
     method: 'get',
     headers: { 'Content-Type': 'application/json' },
