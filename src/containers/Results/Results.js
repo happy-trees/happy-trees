@@ -26,6 +26,8 @@ const Results = ({ scores }) => {
     }
   };
   return (
+    <>
+    <h1 className={styles.Logo}>Happy Trees</h1>
     <section className={styles.resultsBox}>
       <h1 className={styles.resultHeader}>Results</h1>
       {result()}
@@ -35,6 +37,7 @@ const Results = ({ scores }) => {
         </button>
       </Link>
     </section>
+    </>
     
   );
 };
