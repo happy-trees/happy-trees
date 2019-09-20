@@ -14,7 +14,8 @@ import { receiveStroke } from '../../actions/drawingActions';
 import StatusBar from '../../components/gameInput/StatusBar';
 import { getUserId } from '../../selectors/authSelectors';
 import { getIsDrawing, getGameId, getRoundId, getIsPlaying, getGuesses,
-  getRoundNumber, getCurrentDrawer, getCorrectWinner, getIsIntermission, getGuessesLeft, getWord,
+  getRoundNumber, getCurrentDrawer, getCorrectWinner, getIsIntermission,
+  getGuessesLeft, getWord,
 } from '../../selectors/socketSelectors';
 import GameInput from '../../components/gameInput/GameInput';
 import ModalStats from '../../components/modal/ModalStats';
@@ -207,7 +208,7 @@ class GamePage extends React.Component {
               handleChange={this.handleChange}
             />}
 
-            { isIntermission && <ModalStats
+            {isIntermission && <ModalStats
               roundWinner={roundWinner}
               nickname={nickname} 
               countdown={countdown}

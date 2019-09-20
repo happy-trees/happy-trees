@@ -7,15 +7,18 @@ function Instructions() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  return (
 
+  return (
     <>
       <button variant="primary" onClick={handleShow}>Instructions</button>
       
-      <Modal  centered="centered" show={show} backdrop={'static'} keyboard={false} onHide={handleClose}>
+      <Modal centered="centered" show={show} backdrop={'static'}
+        keyboard={false} onHide={handleClose}>
 
         <div className={styles.modal}>
-          <Modal.Title ><h1 className={styles.modalHeader}>Instructions</h1></Modal.Title>
+          <Modal.Title >
+            <h1 className={styles.modalHeader}>Instructions</h1>
+          </Modal.Title>
 
           <Modal.Body>
             <p>Wolcome to Happy Trees</p>
@@ -31,15 +34,13 @@ function Instructions() {
               <li>Guess correctly and you will receive 3pts</li>
               <li>If someone guesses what you are drawing you will receive 2pts</li>
             </ul>
-
           </Modal.Body>
 
           <Modal.Footer>
             <Button 
               className={styles.modalButton} 
               variant="secondary" 
-              onClick={handleClose}
-            >
+              onClick={handleClose}>
               Close 
             </Button>
           </Modal.Footer>

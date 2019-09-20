@@ -2,19 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './landingPage.css';
 
-// import bobavgreen from '../../assets/avatars/bobavgreen.png';
-// <div>
-//   <input type="radio" name="avatar" value={bobavgreen}/>
-//   <label htmlFor="avatar"><img src={bobavgreen} alt=""/></label>
-// </div>;
-
 function LandingPage({ handleSubmit, nickname, handleUpdate }) {
-
   return (
     <div className={styles.Full}>
+
       <h1 className={styles.Logo}>Happy Trees</h1>
+
       <div className={styles.LandingPage}>
         <h1>Choose Nickname:</h1>
+
         <div className={styles.Form}>
           <form onSubmit={handleSubmit}>
             <input 
@@ -27,8 +23,11 @@ function LandingPage({ handleSubmit, nickname, handleUpdate }) {
             <br/>
             <button>Enter</button>
           </form>
+
         </div>
+
       </div>
+      
     </div>
   );
 }
