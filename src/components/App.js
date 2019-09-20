@@ -4,15 +4,11 @@ import {
   Switch,
   Route
 } from 'react-router-dom';
-
 import Home from '../containers/Home/Home.js';
 import Game from '../containers/Game/GamePage';
 import Landing from '../containers/LandingContainer/LandingContainer';
 import Results from '../containers/Results/Results';
 import { WithSession } from './WithSession';
-// import FullGame from '../containers/Game/FullGame';
-
-
 import './app.css';
 import 'normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';

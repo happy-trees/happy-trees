@@ -17,27 +17,35 @@ function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
     if(roundWinner) {
       return <> 
         <p>Winner: {roundWinner.nickname} </p> 
-        <p>Answer: {roundWinner.answer} </p> 
-      </>;
+        <p>Answer: {roundWinner.answer} </p>
+        </>;
     }
   };
 
   return (
     <>
-      <Modal  centered="centered" show={show} backdrop={'static'} keyboard={false} onHide={handleClose}>
+      <Modal 
+        centered="centered"
+        show={show} 
+        backdrop={'static'} 
+        keyboard={false} 
+        onHide={handleClose}
+      >
 
         <div className={styles.modal}>
-          <Modal.Title ><h1 className={styles.modalHeader}>Round Stats</h1></Modal.Title>
+          <Modal.Title >
+            <h1 className={styles.modalHeader}>Round Stats</h1>
+          </Modal.Title>
+
           <Modal.Body>
-
             {hasRoundWinner()}
+            Other guesses:
 
-            Other guesses: 
             <ul> 
               {allGuesses}
             </ul>
-            {isPlaying && <p>Get Ready, next round in: {countdown}</p> }
 
+            {isPlaying && <p>Get Ready, next round in: {countdown}</p> }
           </Modal.Body>
 
           {!isPlaying && <Modal.Footer>
@@ -51,7 +59,9 @@ function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
               </button>
             </Link>
           </Modal.Footer>}
+          
         </div>
+
       </Modal>
     </>
   );
