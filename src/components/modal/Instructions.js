@@ -28,7 +28,6 @@ function Instructions() {
               <li>Each player will get a chance to draw a randomly assigned word</li>
               <li>When it is your turn to draw you will be given a word to draw</li>
               <li>If you are guessing you will have 3 chances to guess what the drawing is</li>
-              <li>If it is your turn to guess you will have 3 attempts to guess</li>
               <li>If you are guessing you will have a hint as to how long the word is at the top of your screen</li>
               <li>Your guesses restart to 3 at the end of each round</li>
               <li>Guess correctly and you will receive 3 points</li>
