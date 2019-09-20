@@ -23,7 +23,8 @@
   align-items: center;
   justify-content: center;
   margin: 10vw;
-  opacity: 0.9;
+  opacity: 0.8;
+  background-color: white;
   
 
   border: 5px solid #cb6ce6; 
@@ -67,6 +68,7 @@
     form {
         display: flex;
         flex-direction: column;
+        opacity: 0.9;
     }
 
   
@@ -87,7 +89,7 @@
               0 0 16px rgba(0,0,0,0.1), 
               0px 0px 3px 3px LightGrey; 
       padding: 15px;
-      background: PaleTurquoise;
+      background: white;
       margin-top: 3vw;
       margin: 0 0 10px 0;
       color: #ff66c4;
@@ -107,7 +109,7 @@
 
   button {
       margin: 2vw;
-      background-color: PaleTurquoise;
+      background-color: white;
       color:#7ed957;
       border: 5px solid #7ed957; 
       border-radius: 10px;
@@ -157,3 +159,5 @@
     width: 60vw;
   }
 }
+
+

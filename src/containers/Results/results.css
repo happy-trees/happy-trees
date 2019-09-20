@@ -40,6 +40,34 @@
   opacity: 0.9;
   padding: 15px;
   color: #CB6CE6;
+
+  border: 5px solid #cb6ce6; 
+  opacity: 0.8;
+  background-color: white;
+
+
+  button {
+    margin: 2vw;
+    background-color: white;
+    color:#7ed957;
+    border: 5px solid #7ed957; 
+    border-radius: 10px;
+    -webkit-box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+          0 0 16px rgba(0,0,0,0.1),
+          0px 0px 3px 3px LightGrey;  
+  -moz-box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+          0 0 16px rgba(0,0,0,0.1), 
+          0px 0px 3px 3px LightGrey; 
+  box-shadow: 
+    inset 0 0 8px  rgba(0,0,0,0.1),
+          0 0 16px rgba(0,0,0,0.1), 
+          0px 0px 3px 3px LightGrey; 
+  
+          transition: .4s ease-out;
+          outline-width: 0;
+  }
 }
 
 button {
