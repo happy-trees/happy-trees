@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+body {
+    overflow: hidden;
+}
 .FullGame {
     width: 95vw;
     height: 95vh;
