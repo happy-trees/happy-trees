@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     align-content: center;
+    overflow: hidden;
 
       .waiting {
         font-family: 'chalkduster';
@@ -20,7 +21,7 @@
         font-size: 3em;
         }
 
-    .fullBorder {
+    .FullBorder {
         width: 98vw;
         height: 98vh;
         display: flex;
@@ -88,11 +89,14 @@
               0px 0px 3px 3px LightGrey; 
     }
 
+}
+
 
     @media screen and (min-width: 875px) and (min-height: 875px) {
         .FullGame {
             padding: 3vw;
-        }
+        
+            
         
         .GameContainer {
             width: 600px;
@@ -103,8 +107,10 @@
               width:606px;
               height:606px;
           }
+
+        }
     }
-}
+
 
 
 @media screen and (max-width: 325px) and (max-height: 575px){
