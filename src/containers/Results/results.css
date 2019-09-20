@@ -41,6 +41,10 @@
   padding: 15px;
   color: #CB6CE6;
 
+  border: 5px solid #cb6ce6; 
+  opacity: 0.8;
+  background-color: white;
+
 
   button {
     margin: 2vw;
