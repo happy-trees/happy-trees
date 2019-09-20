@@ -9,11 +9,16 @@
     align-items: center;
     align-content: center;
 
-    .waiting {
+      .waiting {
+        font-family: 'chalkduster';
         display: flex;
         text-align: center;
         align-items: center;
-      }
+        background: -webkit-linear-gradient( #10ABFF, #FF66C4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 3em;
+        }
     
 
     h1 {
