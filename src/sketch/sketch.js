@@ -1,13 +1,17 @@
 export default function sketch(p){
   let props = {};
+  let canvas;
 
   p.myCustomRedrawAccordingToNewPropsHandler = (newProps) => {
     props = newProps;
+
+    if(canvas && props.strokes)
+      p.resizeCanvas(newProps.canvasWidth, newProps.canvasHeight);
   };
 
   p.setup = () => {
     if(props.canvasHeight && props.canvasWidth) {
-      p.createCanvas(props.canvasWidth, props.canvasHeight);
+      canvas = p.createCanvas(props.canvasWidth, props.canvasHeight);
     } else {
       setTimeout(() => {
         p.setup();
@@ -30,7 +34,7 @@ export default function sketch(p){
   };
 
   p.draw = () => {
-    if(props.strokes && !props.isIntermission) {
+    if(props.strokes) {
       props.strokes.forEach(stroke => {
         p.stroke(stroke.color);
         p.strokeWeight(stroke.strokeWidth);

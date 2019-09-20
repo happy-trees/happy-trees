@@ -121,7 +121,7 @@ class GamePage extends React.Component {
 
   componentWillUnmount() {
     this.socket.removeListener('stroke');
-    this.socket.emit('disconnect');
+    this.socket.emit('disconnect', this.props.gameId);
     this.props.stopListening();
   }
 
