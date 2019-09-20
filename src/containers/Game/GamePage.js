@@ -79,44 +79,35 @@ class GamePage extends React.Component {
       this.props.receiveStroke(data);
     });
 
-    this.socket.on('timer', ({ countdown, round }) => {
-      console.log('round ',  round.roundNumber);
+    this.socket.on('timer', ({ countdown }) => {
       this.setState({ time: countdown });
     });
 
     this.socket.on('joined game', gameId => this.props.joinedGame(gameId));
 
     this.socket.on('correct answer', ({ answer, nickname }) => {
-      console.log('someone made a correct answer', answer, nickname);
       this.props.correctlyAnswered(answer, nickname);
     });
 
-    this.socket.on('wrong answer', ({ answer, guessesLeft, nickname, userId }) => {
+    this.socket.on('wrong answer', ({ answer, userId }) => {
       const isUsersGuess = userId === this.props.userId;
-      console.log('isUserGuess', isUsersGuess);
       this.props.wrongAnswer(answer, isUsersGuess);
-      console.log('someone made a wrong answer', answer, guessesLeft);
-      console.log('nickname, userid', nickname, userId);
     });
 
     this.socket.on('intermission', ({ countdown }) => {
-      console.log('intermission', countdown);
       this.setState({ countdown });
     });
 
     this.socket.on('new round', ({ round, drawer }) => {
-      console.log('new round and drawer', round, drawer);
       this.props.startNewRound(round, this.props.userId, drawer);
     });
 
     this.socket.on('round over', () => {
       this.props.roundOver();
-      console.log('round over');
     });
 
     this.socket.on('game scores', ({ scores }) => {
       this.props.gameOver(scores);
-      console.log('game scores', scores);
     });
   }
 
