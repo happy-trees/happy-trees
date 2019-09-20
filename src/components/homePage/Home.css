@@ -25,6 +25,8 @@
     margin: 0 0 10px 0;
     color: #ff66c4;
     border-radius: 10px;
+    opacity: 0.8;
+  background-color: white;
 
     h1 {
         color: #ff66c4;
