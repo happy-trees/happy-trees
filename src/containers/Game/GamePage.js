@@ -113,7 +113,7 @@ class GamePage extends React.Component {
 
   componentWillUnmount() {
     this.socket.removeListener('stroke');
-    this.socket.emit('disconnect');
+    this.socket.emit('disconnect', this.props.gameId);
     this.props.stopListening();
   }
 
@@ -123,7 +123,6 @@ class GamePage extends React.Component {
 
   emitStroke = (data) => {
     const { gameId } = this.props;
-    data.color = this.state.color;
     this.props.receiveStroke(data);
     this.socket.emit('stroke', { data, gameId });
   }
