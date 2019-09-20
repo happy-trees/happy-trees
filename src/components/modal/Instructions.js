@@ -21,18 +21,18 @@ function Instructions() {
           </Modal.Title>
 
           <Modal.Body>
-            <p>Wolcome to Happy Trees</p>
-            <p>Lets learn the how to play</p>
+            <p>{'Welcome to Happy Trees!'}</p>
+            <p>{'Let\'s learn how to play-'}</p>
             <ul>
               <li>There are 5 rounds in a game</li>
               <li>Each player will get a chance to draw a randomly assigned word</li>
               <li>When it is your turn to draw you will be given a word to draw</li>
               <li>If you are guessing you will have 3 chances to guess what the drawing is</li>
-              <li>If it is your turn to guess you wil have 3 attempts to guess</li>
-              <li>If you are guessinng you will have a hint as to how long the word is at the top of your screen</li>
+              <li>If it is your turn to guess you will have 3 attempts to guess</li>
+              <li>If you are guessing you will have a hint as to how long the word is at the top of your screen</li>
               <li>Your guesses restart to 3 at the end of each round</li>
-              <li>Guess correctly and you will receive 3pts</li>
-              <li>If someone guesses what you are drawing you will receive 2pts</li>
+              <li>Guess correctly and you will receive 3 points</li>
+              <li>If someone guesses what you are drawing you will receive 2 points</li>
             </ul>
           </Modal.Body>
 
