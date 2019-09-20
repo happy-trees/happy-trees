@@ -51,7 +51,6 @@
         height: 2vh;
         font-family: 'Gloria Hallelujah', cursive;
         font-size: 1em;
-        text-decoration: underline;
         margin-bottom: 5vh;
         text-shadow: 2px 2px 0px  #fff,
         -2px -2px 0px  #fff,
@@ -182,7 +181,6 @@
             height: 2vh;
             font-family: 'Gloria Hallelujah', cursive;
             font-size: 1em;
-            text-decoration: underline;
             padding: 5px;
             text-shadow: 2px 2px 0px  #fff,
             -2px -2px 0px  #fff,
