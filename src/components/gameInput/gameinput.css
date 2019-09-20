@@ -9,6 +9,7 @@
 }
 
 .guess {
+  text-align: center;
   font-size: 1em;
   white-space: nowrap;
   text-shadow: 2px 2px 0px  #fff,
@@ -20,6 +21,7 @@
 .form {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .input {

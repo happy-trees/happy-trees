@@ -107,6 +107,10 @@
         
   }
 
+  input:focus {
+    outline-width: 0;
+  }
+
   button {
       margin: 2vw;
       background-color: white;
