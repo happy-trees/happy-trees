@@ -204,6 +204,7 @@ class GamePage extends React.Component {
               countdown={countdown}
               guesses={guesses} 
               isPlaying={isPlaying}
+              word={word}
             /> }
         
           </div>

@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styles from './modal.css';
 
-function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
+function ModalStats({ countdown, guesses, roundWinner, isPlaying, word }) {
   
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
@@ -19,6 +19,8 @@ function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
         <p>Winner: {roundWinner.nickname} </p> 
         <p>Answer: {roundWinner.answer} </p>
         </>;
+    } else {
+      return <p>Looks like no one got the right answer: {word}</p>;
     }
   };
 
@@ -68,10 +70,11 @@ function ModalStats({ countdown, guesses, roundWinner, isPlaying }) {
 }
 
 ModalStats.propTypes = {
-  guesses: PropTypes.array,
+  guesses: PropTypes.array.isRequired,
   countdown: PropTypes.number,
   roundWinner: PropTypes.object,
-  isPlaying: PropTypes.bool.isRequired
+  isPlaying: PropTypes.bool.isRequired,
+  word: PropTypes.string
 };
 
 export default ModalStats;
